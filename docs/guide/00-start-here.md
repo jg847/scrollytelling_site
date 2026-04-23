@@ -36,6 +36,7 @@ The guide is in three parts. **Do Part 1 first**, ship something, then come back
 | 4 | [03-working-with-ai.md](03-working-with-ai.md) | 20 min | **The most important file.** Garden-hose model, failure modes, control loop, tests as durable exit checks, quality audits |
 | 5 | [07-prompt-templates.md](07-prompt-templates.md) | 10 min | Copy-pasteable prompts for every step of the control loop |
 | 6 | [06-reference-as-context-pack.md](06-reference-as-context-pack.md) | 10 min | How to harvest ideas and working code from real sites into your own specs and phases |
+| 7 | [08-a-real-run.md](08-a-real-run.md) | 10 min | One end-to-end run of the loop on a real phase — prompts, loopbacks, and all (template until phase 01 completes) |
 
 ### Part 3 — Reference
 

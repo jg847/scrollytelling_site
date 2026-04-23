@@ -155,6 +155,23 @@ Two ideas are doing most of the work here:
 
 Copy-pasteable versions of these seven prompts live in [07-prompt-templates.md](07-prompt-templates.md).
 
+## Scaling the loop to the work
+
+The full seven-step loop is overkill for "rename a variable" and the right weight for "add a new route with tests." Match the process to the risk:
+
+| Task size | What to run | What to skip | Typical time |
+|---|---|---|---|
+| **Toy** — small fix, one file, reversible in a commit | Steps 1 + 6 + 7. One prompt, implement, eyeball the result, done. | Specs, phases, audit | 5–20 min |
+| **Normal** — one feature, one session, a few files | Steps 3–7 + 6a. Skip harvest/converge if scope is already obvious. One small test. | Audit, unless something feels off | 1–3 hours |
+| **Serious** — new subsystem, refactor, or anything touching shared code | All seven steps, full 6a (positive/negative/edge/golden), 7.5 with at least the Clean Code lens | Nothing | Multiple sessions |
+
+Two rules for picking:
+
+1. **When in doubt, go one step heavier.** The cost of an unnecessary test is an hour. The cost of a missing one is a regression you ship.
+2. **Shared or long-lived code always runs the serious loop.** "It's just a small change" to a file five other components import is not a small change.
+
+The full loop exists so you have the machinery when you need it, not so you run it on every task. A student who runs the toy loop on trivial work and the serious loop on risky work has understood the methodology better than one who runs the full seven steps on everything.
+
 ## What good prompting looks like — worked examples
 
 ### Example 1: Kind of Blue album page
@@ -301,6 +318,7 @@ If you answer no to several of these on the same phase, the fix is not a better 
 ## Keep reading
 
 - Next: [04-your-assignment.md](04-your-assignment.md)
+- One end-to-end run of the loop on a real phase → [08-a-real-run.md](08-a-real-run.md)
 - Copy-pasteable loop prompts (including tests + audits) → [07-prompt-templates.md](07-prompt-templates.md)
 - Testing matrix and conventions → [../specs/07-testing.md](../specs/07-testing.md)
 - How to harvest and reuse working code as a "context pack" → [06-reference-as-context-pack.md](06-reference-as-context-pack.md)

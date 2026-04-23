@@ -31,6 +31,7 @@ The guide is organized in three parts:
 4. [Working with AI](docs/guide/03-working-with-ai.md) — garden-hose model, failure modes, control loop, tests as durable exit checks, quality audits. **The most important file.**
 5. [Prompt templates](docs/guide/07-prompt-templates.md) — copy-pasteable prompts for every step of the control loop.
 6. [Reference projects as context packs](docs/guide/06-reference-as-context-pack.md) — how to harvest ideas and working code from sites like [bseai_degree](https://github.com/kaw393939/bseai_degree) into your own specs and phases.
+7. [A real run of the loop](docs/guide/08-a-real-run.md) — one end-to-end transcript on a real phase, including loopbacks. (Template until phase 01 is complete.)
 
 **Part 3 — Reference**
 7. [Glossary](docs/guide/05-glossary.md) — every term in one place.
