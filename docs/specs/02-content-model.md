@@ -27,7 +27,7 @@ Every file begins with a YAML block validated by Zod at build time.
 ```yaml
 ---
 title: "Euphotic Zone"
-layout: "presentation"         # "standard" | "presentation"
+layout: "standard"         # "standard" | "presentation"
 heroImage: "/images/ocean/euphotic-reef.webp"  # optional
 summary: "The sunlit skin of the ocean, where photosynthesis still works."    # optional
 seo:
@@ -73,38 +73,38 @@ Markdown body supports:
 - Internal links use `[label](/slug)` and are rewritten with `basePath` at render time.
 - External links render as `<a target="_blank" rel="noopener">`.
 
-## Presentation-specific authoring
+## Narrative section authoring
 
-When `layout: "presentation"`, the parser splits the body on horizontal rules (`---`) into slides. Each slide becomes one `PresentationSlide`.
+For the homepage and zone pages, `layout: "standard"` still supports horizontal rules (`---`) as scrollytelling section breaks. The parser splits the body into narrative sections, and `StandardLayout` turns those sections into a continuous long-scroll sequence with sticky or full-bleed media depending on the directive.
 
 ```markdown
 ---
-title: "How sticky slides work"
-layout: "presentation"
+title: "How the continuous story works"
+layout: "standard"
 ---
 
 ## The trick
 
-A tall section with a sticky inner stage.
+A long-running section with sticky media while the prose passes it.
 
 ---
 
 ![bg](/images/media/modules/generated/era-1-visual-break.webp)
 
-## Background slide
+## Background section
 
-The image fills the viewport; text sits on top.
+The image fills the section; text sits on top while the page keeps moving.
 
 ---
 
 ![split](/images/media/modules/portraits/alan-turing.webp)
 
-## Split slide
+## Split section
 
-The image lives on the right, prose on the left.
+The image stays in view while prose continues alongside it.
 ```
 
-Supported image directives (parsed in `src/lib/content/parser.ts`):
+Supported image directives (parsed in `src/lib/content/parser.ts` and consumed by the standard narrative shell):
 
 | Alt text | Effect |
 |---|---|
@@ -155,6 +155,6 @@ getPagesRepo(): ContentRepository;  // baseDir = content/pages/
 
 1. Create `content/pages/my-new-page.md`.
 2. Fill frontmatter (`title`, `layout` required).
-3. Write the body. Use `---` between slides if presentation.
+3. Write the body. Use `---` between narrative sections when a page should unfold as a continuous scrollytelling sequence.
 4. `npm run dev` — page is immediately reachable at `/my-new-page`.
 5. Commit + push. CI rebuilds and deploys.

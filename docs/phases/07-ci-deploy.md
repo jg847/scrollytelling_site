@@ -1,5 +1,5 @@
 ---
-status: pending
+status: in-progress
 phase: 07
 title: CI + deploy hardening
 depends-on: [06]
@@ -8,7 +8,7 @@ depends-on: [06]
 # Phase 07 — CI + deploy hardening
 
 ## Objective
-Take the scaffold workflow from Phase 00 to its final shape: lint + unit + build + e2e + deploy, with Playwright report artifacts and basePath correctness verified on a live Pages URL.
+Take the scaffold workflow from Phase 00 to its final shape: lint + unit + build + e2e + deploy, with Playwright report artifacts and basePath correctness verified on a live Pages URL. This phase now serves the continuous standard-layout story path rather than the legacy presentation deck.
 
 ## Spec references
 - [specs/08-deployment.md](../specs/08-deployment.md)
@@ -39,7 +39,7 @@ Study but do **not** copy blindly — the reference has a `sed` rewrite step tha
 7. **Live checks.** Visit `https://<user>.github.io/scrolly/`:
    - Home loads; no 404s on `/_next/*` or images (DevTools → Network).
    - `/euphotic/` loads.
-   - `/hadal/` works; progress bar moves.
+   - `/hadal/` works; sticky media and zone navigation still function.
    - Reduced-motion in OS settings disables animations.
 8. **Lighthouse.** Run against the deployed URL. Target: Perf ≥ 90, A11y ≥ 95, Best Practices ≥ 95, SEO ≥ 95. Fix regressions.
 
@@ -54,8 +54,13 @@ Study but do **not** copy blindly — the reference has a `sed` rewrite step tha
 - [ ] Deployed site fully functional, no console errors, no 404s
 - [ ] Lighthouse mobile: Perf ≥ 90, A11y ≥ 95
 - [ ] Playwright report uploaded as artifact (manually force a failing run to confirm, then revert)
-- [ ] `grep -rn "/_next\|/images" src/` finds only JSX attributes Next handles, not manual string concatenation
+- [x] `grep -rn "/_next\|/images" src/` finds only JSX attributes Next handles, not manual string concatenation
 
 ## Completion notes
 
-<!-- Filled in after execution -->
+- Hardened `.github/workflows/deploy.yml` to the four-job `verify` / `build` / `e2e` / `deploy` shape.
+- Updated `playwright.config.ts` for CI-aware retries and `reuseExistingServer` behavior.
+- Tightened `npm run lint` to `eslint .` and fixed the pre-existing lint blockers that prevented Phase 07 from being meaningful.
+- Routed the image library page through `src/lib/site-config.ts#url()` instead of manual base-path concatenation.
+- Local verification is green (`npm run lint && npm run test && npm run test:e2e && npm run build`).
+- Remaining work is the real GitHub push, Pages configuration, live smoke checks, and Lighthouse.

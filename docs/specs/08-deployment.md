@@ -44,7 +44,7 @@ Use `url("/images/foo.webp")` anywhere an asset path is built manually (outside 
 
 ## GitHub Actions workflow
 
-Already created at [.github/workflows/deploy.yml](../.github/workflows/deploy.yml). The final shape we target:
+Already created at [.github/workflows/deploy.yml](../.github/workflows/deploy.yml). The repo now includes the intended four-job local/CI shape; the remaining work is validating it on the actual GitHub Pages environment:
 
 ```yaml
 name: Deploy Next.js site to Pages
@@ -98,6 +98,12 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report
+          if-no-files-found: ignore
 
   deploy:
     needs: [build, e2e]
@@ -114,6 +120,39 @@ Notes:
 - `actions/configure-pages@v5` emits `base_path` automatically (e.g. `/scrolly`) for project sites.
 - `.nojekyll` prevents GitHub Pages from stripping `_next/` folders.
 - E2E runs against a freshly-built `out/` served by Playwright's `webServer`.
+- `playwright.config.ts` is CI-aware: `retries: process.env.CI ? 2 : 0` and `reuseExistingServer: !process.env.CI`.
+- The remaining manual asset-path surface in app code should use `src/lib/site-config.ts#url()`; the image library page now does.
+
+## Current status
+
+Implemented locally:
+
+- `npm run lint`
+- `npm run test`
+- `npm run test:e2e`
+- `npm run build`
+- four-job workflow shape in `.github/workflows/deploy.yml`
+- CI-aware Playwright settings
+- `.nojekyll` creation during build job
+- orphan-image verification via `tests/unit/image-assets.test.ts`
+- local Lighthouse sample on `/`, `/abyssal/`, and `/hadal/` against the exported site
+
+Local Lighthouse snapshot after the latest content/parser cleanup:
+
+- `/` → `51 / 100 / 100 / 100` (performance / accessibility / best-practices / SEO)
+- `/abyssal/` → `90 / 100 / 100 / 100`
+- `/hadal/` → `91 / 100 / 100 / 100`
+
+Interpretation:
+- The deploy-critical quality bars are clean locally for accessibility, best-practices, and SEO on the sampled routes.
+- Home-page performance is still below the desired Phase 08 target and remains the main local Lighthouse follow-up item.
+
+Still pending on GitHub:
+
+- first real workflow run on `main`
+- Pages source confirmed as GitHub Actions
+- deployed-site smoke checks on the real Pages URL
+- Lighthouse against the live deployment
 
 ## GitHub repo settings to verify
 
@@ -125,7 +164,7 @@ Notes:
 
 - [ ] Repo pushed to GitHub with `main` as default branch.
 - [ ] Pages set to "GitHub Actions".
-- [ ] One successful `npm run build` locally (with `NEXT_PUBLIC_BASE_PATH=/scrolly`) producing `out/index.html`.
+- [x] One successful `npm run build` locally (with `NEXT_PUBLIC_BASE_PATH=/scrolly`) producing `out/index.html`.
 - [ ] Workflow run green on first push.
 - [ ] Site loads at `https://<user>.github.io/scrolly/` with no 404s on `/_next/*`.
 

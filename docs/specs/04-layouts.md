@@ -6,10 +6,10 @@ A **layout** owns the page shell (header, nav, footer) and the rendering strateg
 
 | Layout | When to use | Body rendering |
 |---|---|---|
-| `standard` | Essays, glossaries, reference side-pages | One continuous flow; headings/paragraphs rendered sequentially |
-| `presentation` | The ocean descent, story decks, step-through explainers | Body split on `---` into sticky slides |
+| `standard` | The ocean descent, essays, glossaries, and reference side-pages | One continuous flow; for story pages, `---` becomes slide-aware narrative sections with sticky or full-bleed media |
+| `presentation` | Optional story decks and step-through explainers | Body split on `---` into sticky slides |
 
-For the ocean site in v1, the homepage and all five zone pages use `presentation`. `standard` remains in the system for auxiliary pages and future expansion, but it is not the primary reading mode for the descent itself.
+For the ocean site in v1, the homepage and all five zone pages use `standard`. That layout is the primary reading mode for the descent itself; `presentation` remains available as an alternate deck-style mode, but it is no longer the default story shell.
 
 ## Factory
 
@@ -36,14 +36,18 @@ Responsibilities:
 - Wrap body sections in `<Reveal>` so content fades/slides in as you scroll. Implicit — the renderer decides.
 - Provide a sticky table-of-contents sidebar on wide viewports (≥ 1100px), auto-generated from H2s. Hidden below that breakpoint.
 - Apply reading-width typography (max-width ≈ 68ch) from tokens.
+- For story pages, parse `---` sections with `splitMarkdownIntoSlides()` and render them as a continuous narrative rail: plain sections stay text-first, `split` / `split-reverse` sections keep media sticky beside the text, and `bg` sections become full-bleed atmospheric panels.
+- Surface the authored sequence as a visible narrative rhythm via section markers and sticky media rather than slide-by-slide keyboard navigation.
 
 CSS module: `StandardLayout.module.css`. Uses CSS Grid for the `hero` region (image + title/summary side-by-side), falls back to stacked on narrow viewports.
 
 No `SlideContext` is provided. All `Reveal`s in a standard page run in viewport mode.
 
-In the ocean roadmap, this layout is a support surface, not the headline experience. It exists for reference pages, credits, or future auxiliary material.
+In the current ocean roadmap, this layout is both the support surface and the headline experience. The goal is an immersive continuous descent rather than a discrete deck.
 
 ## `PresentationLayout`
+
+This layout is retained as an alternate deck-style mode.
 
 Responsibilities:
 - Parse the body with `splitMarkdownIntoSlides()` from `src/lib/content/parser.ts`.
@@ -55,6 +59,8 @@ Responsibilities:
 Each `PresentationSlide` pushes a `SlideContext`, so `Reveal`/`DriftMedia`/`SceneCard` inside it run in slide mode automatically.
 
 ## Keyboard controls (presentation)
+
+These only apply when a page explicitly uses `layout: "presentation"`.
 
 | Key | Action |
 |---|---|

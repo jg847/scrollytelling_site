@@ -1,6 +1,6 @@
 ---
 title: "Dysphotic Zone"
-layout: "presentation"
+layout: "standard"
 summary: "The Twilight Zone — 200 to 1,000 meters. Light fades to a thin blue haze, photosynthesis stops, and the animals start making their own light."
 order: 2
 seo:
@@ -8,7 +8,7 @@ seo:
   description: "200 to 1,000 meters down. Where sunlight runs out, bioluminescence takes over, and the largest animal migration on Earth happens every night."
 ---
 
-![bg 50% 35% | A diver descending into dim blue twilight water as sunlight fades above](/images/ocean/dysphotic-zone.webp)
+![bg 50% 35% | Bioluminescent jellyfish lighting up the dark ocean](/images/twilight.jpg)
 
 ## The light runs out
 
@@ -16,11 +16,7 @@ At 200 meters, you cross an invisible line. Above it, plants can still photosynt
 
 There's no horizon down here. No up, no down, no shadow direction. Just a soft glow from above that gets fainter as you sink.
 
----
-
-![split | A twilight-zone fish drifting through dim blue water](/images/dysphotic.jpg)
-
-## What lives here
+## About the Zone
 
 ```stat-grid
 800 m | thickness of this zone
@@ -29,6 +25,11 @@ There's no horizon down here. No up, no down, no shadow direction. Just a soft g
 ~4 °C | temperature near the bottom
 100 atm | pressure at 1,000 m
 ```
+---
+
+![split | Dysphotic Zone zoology](/images/dysphotic.jpg)
+
+## The Wildlife
 
 Almost everything here is small, dark-colored, and silver-bellied. The silver bellies act as camouflage — they reflect the faint light from above, hiding the fish from predators looking up. The dark backs hide them from predators looking down.
 
@@ -40,49 +41,24 @@ You'll find **lanternfish** (so abundant they may make up 65% of all deep-sea fi
 
 Every single night, billions of these creatures swim *up* into the Euphotic Zone to feed under cover of darkness, then descend back at dawn to hide. Biologists call it the **diel vertical migration**. It's the largest daily movement of biomass on the planet — and it was a mystery for decades because sonar operators kept seeing a "false bottom" that rose at sunset and sank at sunrise.
 
+---
+
+![split-reverse | Midwater fish rising through fading blue water during the nightly vertical migration](/images/migration.jpg)
+
 ```timeline
 Dusk | Migration begins — animals rise hundreds of meters
 Night | Feeding in the surface layer above
 Dawn | Mass descent back to the twilight depths
 Day | Hiding in the dim midwater, conserving energy
 ```
-
-```progress-bar
-label: Reader descent through the twilight layer
-tint: var(--bio-violet)
-```
-
-```scroll-demo
-title: Twilight descent compressed
-intro: This mini sticky stage condenses the same transition the full page is making as you move from surface glow to blackwater.
-steps: Surface shimmer | Blue haze | Bioluminescent midwater | Blackwater threshold
-```
-
-```mermaid
-flowchart TD
-  Surface[Surface light] --> Twilight[Blue twilight]
-  Twilight --> Silhouette[Predators track silhouettes]
-  Twilight --> Glow[Bioluminescence becomes useful]
-  Glow --> Midnight[No sunlight below 1000 m]
-```
-
-```code-sample
-title: Sonar log shorthand
-lang: txt
-
-17:42 - false bottom begins to rise with dusk
-21:10 - lanternfish layer reaches the feeding band
-05:02 - deep scattering layer sinks below the sonar beam
-```
-
 ---
 
 ## Why bioluminescence works here
 
 Sunlight is too weak to see by, but not zero. So animals evolved their own. Roughly **76% of midwater species** can produce light — for camouflage (counter-illumination, where a fish lights its belly to match the dim glow above), for hunting (a glowing lure), for mating, and for startling predators.
 
+---
+
 ## Keep going
 
 The last of the blue is about to vanish. Below 1,000 meters, no sunlight reaches at all — and the animals down there have stopped expecting it.
-
-[Descend to the Aphotic Zone →](/aphotic)

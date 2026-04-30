@@ -28,9 +28,8 @@ export function ProgressBar({ source }: { source: string }) {
 function ProgressBarBody({ progress }: { progress: ProgressBarModel }) {
   const { scrollYProgress } = useScroll();
   const reducedMotion = useReducedMotion();
-  const scaleX = reducedMotion
-    ? scrollYProgress
-    : useSpring(scrollYProgress, { stiffness: 110, damping: 28, restDelta: 0.001 });
+  const springScaleX = useSpring(scrollYProgress, { stiffness: 110, damping: 28, restDelta: 0.001 });
+  const scaleX = reducedMotion ? scrollYProgress : springScaleX;
   const style = progress.tint ? ({ "--viz-tint": progress.tint } as CSSProperties) : undefined;
 
   return (

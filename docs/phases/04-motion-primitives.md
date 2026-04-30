@@ -7,8 +7,10 @@ depends-on: [03]
 
 # Phase 04 — Motion primitives
 
+> Historical note: this phase still contains useful implementation detail, but the current site uses these primitives mainly inside the continuous standard-layout story shell rather than a presentation-first deck.
+
 ## Objective
-Ship the dual-mode scrollytelling primitives. Integrate reveal behavior into `MarkdownRenderer` so the shared renderer works immediately and is ready for the presentation-first ocean pages, while still respecting reduced-motion. Full sticky-slide orchestration lands in Phase 05.
+Ship the dual-mode scrollytelling primitives. Integrate reveal behavior into `MarkdownRenderer` so the shared renderer works immediately and supports the continuous standard-layout ocean pages, while still respecting reduced-motion. Full sticky-slide orchestration remains available only for the alternate presentation mode.
 
 ## Spec references
 - [specs/03-motion-system.md](../specs/03-motion-system.md) — the canonical contract. Read in full before coding.
@@ -34,7 +36,7 @@ Ship the dual-mode scrollytelling primitives. Integrate reveal behavior into `Ma
 6. **Integrate into `MarkdownRenderer`.**
    - Wrap each top-level block (paragraphs, headings, lists, images) in `<Reveal>` with sensible defaults (`direction="up"`, `sequence="standard"`).
    - One approach: in the `h2`/`h3` handler, render `<Reveal><Heading>...</Heading></Reveal>`. For paragraphs: `<Reveal delay={0.05}><Text>...</Text></Reveal>`.
-   - The presentation layout will provide a `SlideContext` later, flipping the same `Reveal`s into slide mode automatically.
+   - The presentation layout can still provide a `SlideContext` later, flipping the same `Reveal`s into slide mode automatically when that alternate mode is used.
 7. **Parallax hero (optional polish).** If `frontmatter.heroImage` is set in `StandardLayout`, render a `ParallaxBackground` behind the hero copy.
 8. **Accessibility smoke.** Add a `<main>` skip-link (`#main`) in `SiteHeader`; confirm focus order unaffected by motion wrappers.
 9. **E2E setup.**

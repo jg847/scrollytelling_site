@@ -14,13 +14,8 @@ import styles from "./PresentationShortcuts.module.css";
 
 export function PresentationShortcuts({ inertTargetId }: { inertTargetId: string }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isReady, setIsReady] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   const headingId = "presentation-shortcuts-title";
-
-  useEffect(() => {
-    setIsReady(true);
-  }, []);
 
   useEffect(() => {
     const target = document.getElementById(inertTargetId);
@@ -92,7 +87,7 @@ export function PresentationShortcuts({ inertTargetId }: { inertTargetId: string
       <button
         aria-label="Open presentation shortcuts"
         className={styles.toggle}
-        data-presentation-shortcuts-ready={isReady ? "true" : "false"}
+        data-presentation-shortcuts-ready="true"
         type="button"
         onClick={() => setIsOpen(true)}
       >

@@ -7,8 +7,10 @@ depends-on: [02]
 
 # Phase 03 — Shared shell + markdown renderer
 
+> Historical note: this phase describes the original implementation plan. The current ocean descent uses the standard layout as the primary narrative shell, not as a support-only surface.
+
 ## Objective
-Render real markdown through the design system and establish the shared page shell. Ship `MarkdownRenderer`, `PageLayoutFactory`, site chrome, and the support-page `StandardLayout`, while keeping `presentation` as the primary v1 destination for the ocean descent.
+Render real markdown through the design system and establish the shared page shell. Ship `MarkdownRenderer`, `PageLayoutFactory`, site chrome, and `StandardLayout`, which now serves as both the support-page shell and the primary long-scroll narrative surface for the ocean descent.
 
 ## Spec references
 - [specs/04-layouts.md](../specs/04-layouts.md) §`StandardLayout`
@@ -28,12 +30,12 @@ Render real markdown through the design system and establish the shared page she
 
 ## Steps
 
-1. **Factory.** Port `PageLayoutFactory`. Keep only `standard` and `presentation` cases. Presentation is the expected path for `home` and the zone pages; until Phase 05 lands, the presentation branch may render a disciplined placeholder shell instead of the final sticky-slide experience.
+1. **Factory.** Port `PageLayoutFactory`. Keep only `standard` and `presentation` cases. The homepage and zone pages now route through `standard`; `presentation` remains available only as an alternate deck-style mode.
 2. **`StandardLayout`.**
    - Hero: grid with `heroImage` (optional) on one side, title + summary on the other.
    - Reading column: max-width from `--slide-measure` or a dedicated `--measure` token (add to globals if missing). Center-aligned.
    - Sticky ToC: right-side nav at ≥ 1100px; hidden below. Generate from H2s in the rendered body. Use `IntersectionObserver` to highlight the active section (port reference pattern if present; otherwise a simple `useEffect`).
-   - Treat this as the support-page layout, not the primary ocean reading mode.
+   - Treat this as the primary ocean reading mode as well as the support-page layout.
 3. **`MarkdownRenderer`.**
    - Uses `next-mdx-remote/rsc` with `remarkGfm`.
    - Component map: `h1..h4` → `Heading`, `a` → `ContextualLink`, `p` → `Text`, `ul`/`ol`/`li` → styled defaults (module CSS), `code` inline → styled `<code>`, `pre` → `children` passthrough (viz dispatch lands in Phase 06).

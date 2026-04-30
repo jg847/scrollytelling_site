@@ -1,20 +1,22 @@
 ---
 title: "Hadal Zone"
-layout: "presentation"
+layout: "standard"
 summary: "The Trenches — 6,000 to nearly 11,000 meters. Named after Hades. The deepest places on Earth, each one a separate island of life cut off from every other."
 order: 5
 seo:
   title: "Hadal Zone — The Trenches"
   description: "6,000 to ~11,000 meters down. The Mariana Trench, the Challenger Deep, and the strange isolated ecosystems of the deepest places on Earth."
 ---
+---
 
-## The underworld
+![bg 50% 45% | An Amphipod at 8,000 meters](/images/hadalzone.jpg)
+## The Underworld
 
 The seafloor isn't flat everywhere. In a handful of places — mostly along the Pacific Ring of Fire — one tectonic plate slides beneath another, cracking open trenches that drop another 5 kilometers below the abyssal plain. These are the **hadal trenches**, named after *Hades*. They make up less than a quarter of one percent of the seafloor by area, and they are the deepest places on Earth.
 
 The deepest of them is the **Challenger Deep**, at the southern end of the **Mariana Trench**. The bottom is roughly **10,935 meters** down — almost 11 kilometers of ocean stacked on top of you. If you dropped Mount Everest into it, the summit would still be more than two kilometers underwater.
 
-## The pressure problem
+## About the Zone
 
 ```stat-grid
 ~10,935 m | depth at Challenger Deep
@@ -23,10 +25,6 @@ The deepest of them is the **Challenger Deep**, at the southern end of the **Mar
 <0.25% | of seafloor by area
 1–2 °C | year-round temperature
 ```
-
-At a thousand atmospheres of pressure, water is no longer easily compressible. Steel deforms. Submarines need 90 mm titanium hulls just to hold a person inside. The pressure pushes against every cell of every living thing down here, and biology has had to invent a workaround.
-
-That workaround is a small molecule called **TMAO** (trimethylamine N-oxide). Hadal fish carry the highest concentrations of it of any animals on Earth — it stabilizes their proteins against the crushing force. Above about **8,400 meters**, even TMAO isn't enough. No fish has ever been found deeper than that. Below that line, the trench belongs to amphipods, sea cucumbers, and single cells.
 
 ---
 
@@ -40,6 +38,17 @@ You'd find **hadal snailfish** — pale, gelatinous, with no scales and no swim 
 
 ---
 
+## Metal Crushing Pressure
+
+At a thousand atmospheres of pressure, water is no longer easily compressible. Steel deforms. Submarines need 90 mm titanium hulls just to hold a person inside. The pressure pushes against every cell of every living thing down here, and biology has had to invent a workaround.
+
+That workaround is a small molecule called **TMAO** (trimethylamine N-oxide). Hadal fish carry the highest concentrations of it of any animals on Earth — it stabilizes their proteins against the crushing force. Above about **8,400 meters**, even TMAO isn't enough. No fish has ever been found deeper than that. Below that line, the trench belongs to amphipods, sea cucumbers, and single cells.
+
+
+---
+
+![split-reverse | Navy Lieutenant Don Walsh and Swiss engineer Jacques Piccard pose for a photo on board the Trieste on reaching the bottom of the Challenger Deep, each holding the flag of his respective home country](/images/challengerdeep.jpg)
+
 ## Humans down here
 
 ```timeline
@@ -49,12 +58,17 @@ You'd find **hadal snailfish** — pale, gelatinous, with no scales and no swim 
 2019 | A plastic bag is filmed at the bottom of Challenger Deep
 2020s | Crewed dives total in the dozens — fewer than have walked on the Moon
 ```
+---
+
+## The Challenger Deep
 
 Twelve people have set foot on the Moon. As of the early 2020s, **fewer than that** had reached the bottom of Challenger Deep. We've done a worse job exploring the deepest part of our own planet than the surface of another world.
 
 And we got there in time to leave litter.
 
-## You've reached the bottom
+---
+
+# You've reached the bottom
 
 There's nowhere further down. The seafloor is the floor — the trench bottom is mud and rock and a few patient animals waiting for the next thing to fall. Above you: 11 kilometers of black water, then a thin lit band, then sky.
 

@@ -48,7 +48,7 @@ Included:
   - `content/pages/aphotic.md` — Midnight Zone (1000–4000 m)
   - `content/pages/abyssal.md` — Abyssal Zone (4000–6000 m)
   - `content/pages/hadal.md` — Hadal Zone (6000–11 000 m)
-- The `presentation` long-scroll layout, used by every page in v1.
+- The `standard` long-scroll layout, used by the homepage and every zone page in v1. The descent is authored as one continuous narrative with sticky media and section-to-section visual transitions.
 - A `ZoneNavigator` primitive that renders a "Continue descent →" link to the next zone in the sequence (and a "↑ Back up" link to the previous) at the foot of every zone page. Order is read from a `descentOrder` field in frontmatter, not hard-coded.
 - Scrollytelling primitives: dual-mode `Reveal`, `LayeredRevealGroup`, `DriftMedia`, `SceneCard`, `DepthScene` (sticky media + scrolling text), `ParallaxBackground`.
 - A depth-aware theming system: tokens shift as the reader descends a zone.

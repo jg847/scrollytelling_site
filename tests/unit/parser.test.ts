@@ -72,4 +72,27 @@ describe("splitMarkdownIntoSlides", () => {
       markdown: "## Snailfish",
     });
   });
+
+  it("ignores duplicate leading directives after the first recognized one", () => {
+    const [slide] = splitMarkdownIntoSlides(
+      "![bg 50% 58% | A wide abyssal plain](/abyssal.jpg)\n\n![split | Duplicate directive should not leak into markdown](/abyssal.jpg)\n\n## What lives here",
+    );
+
+    expect(slide).toMatchObject({
+      kind: "bg",
+      imageUrl: "/abyssal.jpg",
+      imageAlt: "A wide abyssal plain",
+      objectPosition: "50% 58%",
+      markdown: "## What lives here",
+    });
+  });
+
+  it("leaves ordinary markdown images untouched", () => {
+    const [slide] = splitMarkdownIntoSlides("![Lanternfish](/lanternfish.webp)\n\n## Caption");
+
+    expect(slide).toMatchObject({
+      kind: "plain",
+      markdown: "![Lanternfish](/lanternfish.webp)\n\n## Caption",
+    });
+  });
 });

@@ -63,7 +63,7 @@ export function DepthThemeProvider({ children }: { children: React.ReactNode }) 
     return () => {
       delete document.body.dataset.zone;
     };
-  }, [pathname]);
+  }, [pathname, scrollYProgress]);
 
   return children;
 }

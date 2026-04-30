@@ -44,11 +44,11 @@ Ref: [04-layouts.md](./04-layouts.md), [06-visualizations.md](./06-visualization
 
 - `src/components/layouts/StandardLayout.tsx` — support-page shell for any auxiliary non-descent page.
 - `src/components/markdown/MarkdownRenderer.tsx` with the component map (no viz yet — just headings, links, lists, code).
-- `src/components/layouts/PageLayoutFactory.tsx` — dispatches by `frontmatter.layout`, with `presentation` treated as the primary v1 path.
+- `src/components/layouts/PageLayoutFactory.tsx` — dispatches by `frontmatter.layout`, with `standard` treated as the primary v1 path for the ocean story.
 - `SiteHeader` — minimal, dark-themed; a brand mark and a "return to surface" link.
 - `SiteFooter` — credits, source link.
 
-**Exit criteria:** markdown renders through the design system; the shared page chrome is in place; the factory cleanly routes `presentation` pages toward the upcoming sticky-slide work; no viz components are rendered yet.
+**Exit criteria:** markdown renders through the design system; the shared page chrome is in place; the factory cleanly routes story pages into the continuous standard narrative shell; no viz components are rendered yet.
 
 ## Milestone 4 — Motion primitives
 
@@ -57,7 +57,7 @@ Ref: [03-motion-system.md](./03-motion-system.md)
 - `SlideContext` (kept as the shared switch that lets the same motion primitives run in viewport mode now and slide mode once the presentation shell is active).
 - `Reveal` (dual-mode), `LayeredRevealGroup`, `DriftMedia`, `SceneCard`, `ParallaxBackground`.
 - `DepthScene` — a sticky-media-with-scrolling-text scrollytelling primitive used inside zone pages. Wraps a `useScroll` over its own section so a single image / illustration can be pinned while several paragraphs of prose pass alongside.
-- Integrate viewport-mode `Reveal` into any non-presentation rendering path, while keeping the same components ready to switch into slide mode once `PresentationLayout` is active.
+- Integrate viewport-mode `Reveal` into the standard narrative path, while keeping the same components compatible with the alternate `PresentationLayout` if that mode is used later.
 - E2E tests: one reveal/reduced-motion check on the homepage or euphotic page.
 
 **Exit criteria:** scrolling down the early ocean pages shows section fade-ins where appropriate; a `DepthScene` pins an illustration while accompanying paragraphs scroll past; reduced motion disables transforms across the board.

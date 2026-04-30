@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import Link from "next/link";
+import { basePath, url } from "@/lib/site-config";
 
 export const metadata = {
   title: "Image library · Scrolly",
@@ -77,7 +78,6 @@ function formatBytes(n: number): string {
 
 export default function ImageLibraryPage() {
   const root = path.join(process.cwd(), "public", "images");
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const groups = walkImages(root);
   const totalCount = groups.reduce((n, g) => n + g.entries.length, 0);
   const totalBytes = groups.reduce(
@@ -167,7 +167,7 @@ export default function ImageLibraryPage() {
             }}
           >
             {group.entries.map((entry) => {
-              const href = `${basePath}${entry.publicPath}`;
+              const href = url(entry.publicPath);
               return (
                 <li
                   key={entry.publicPath}

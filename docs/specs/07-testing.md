@@ -56,10 +56,9 @@ This matrix is referenced from the guide's [Working with AI § Tests as durable 
 
 | Spec | Assertion |
 |---|---|
-| `homepage.spec.ts` | `/` responds 200, title matches frontmatter, hero image visible, first section enters viewport after scroll |
+| `homepage.spec.ts` | `/` responds 200, title matches frontmatter, and the first stitched zone heading enters the viewport once scrolled into the descent |
 | `standard-reveal.spec.ts` | A `<Reveal>` element starts with `opacity: 0` and reaches `opacity: 1` after scrolling past it |
-| `presentation.spec.ts` | A presentation page has the expected number of slides; scroll to end hits the footer gate |
-| `presentation-keyboard.spec.ts` | `ArrowDown` advances to next slide; `Home` returns to first |
+| `zones.spec.ts` | Each zone page renders as a continuous narrative surface, expected story sections appear, sticky media works on wide screens, and navigation continues the descent |
 | `reduced-motion.spec.ts` | With `prefers-reduced-motion: reduce` emulated, animated elements have no non-identity transform at rest |
 | `links.spec.ts` | Internal links include basePath; external links have `target="_blank"` and `rel` |
 
