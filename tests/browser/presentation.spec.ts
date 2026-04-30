@@ -13,6 +13,12 @@ test("euphotic zone page loads", async ({ page }) => {
 test("dysphotic zone page loads", async ({ page }) => {
   await page.goto("/dysphotic/");
   await expect(page.getByRole("heading", { level: 1 }).first()).toHaveText("Dysphotic Zone");
+  await expect(page.locator("[data-viz='stat-grid']")).toHaveCount(1);
+  await expect(page.locator("[data-viz='timeline']")).toHaveCount(1);
+  await expect(page.locator("[data-viz='progress-bar']")).toHaveCount(1);
+  await expect(page.locator("[data-viz='scroll-demo']")).toHaveCount(1);
+  await expect(page.locator("[data-viz='mermaid']")).toHaveCount(1);
+  await expect(page.locator("[data-viz='code-sample']")).toHaveCount(1);
 });
 
 test("aphotic zone page loads", async ({ page }) => {

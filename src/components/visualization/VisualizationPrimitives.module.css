@@ -1,8 +1,12 @@
 .errorCard,
 .surfaceCard,
 .statTile,
+.codeSample,
 .codeBlock,
 .mermaidBlock,
+.mermaidCard,
+.mermaidShell,
+.progressCard,
 .progressShell {
   border: 1px solid var(--rule);
   border-radius: var(--radius-md);
@@ -11,34 +15,180 @@
 
 .errorCard {
   padding: 1rem;
-  background: rgba(255, 95, 177, 0.12);
+  background: color-mix(in oklab, var(--bio-magenta) 18%, transparent 82%);
   color: var(--text-strong);
+}
+
+.errorTitle {
+  display: block;
+  margin-bottom: 0.35rem;
 }
 
 .surfaceCard {
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: color-mix(in oklab, var(--surface) 88%, transparent 12%);
+}
+
+.scrollDemoCard {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.1rem, 3vw, 1.5rem);
+  border: 1px solid color-mix(in oklab, var(--accent) 22%, var(--rule) 78%);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at top right, color-mix(in oklab, var(--accent) 20%, transparent 80%), transparent 38%),
+    linear-gradient(180deg, color-mix(in oklab, var(--surface) 92%, transparent 8%), color-mix(in oklab, var(--page-background) 84%, transparent 16%));
+  box-shadow: var(--shadow-lg);
+}
+
+.scrollDemoBackdrop {
+  position: absolute;
+  inset: auto -12% -30% auto;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--accent) 18%, transparent 82%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.scrollDemoHeader {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.scrollDemoReadout {
+  min-width: 7rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid color-mix(in oklab, var(--accent) 24%, var(--rule) 76%);
+  border-radius: var(--radius-md);
+  background: color-mix(in oklab, var(--sea-abyss) 56%, transparent 44%);
+  color: var(--text-strong);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 1rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.scrollDemoReadoutLabel {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .preWrap,
 .codeBlock,
-.mermaidBlock {
+.mermaidBlock,
+.mermaidShell {
   overflow-x: auto;
   white-space: pre-wrap;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.92rem;
 }
 
+.vizEyebrow {
+  margin-bottom: 0.45rem;
+  color: var(--accent);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.vizTitle {
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  color: var(--text-strong);
+}
+
+.vizCopy {
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+}
+
 .codeBlock {
   padding: 1rem;
-  background: rgba(2, 6, 15, 0.92);
+  margin: 0;
+  background: color-mix(in oklab, var(--sea-abyss) 88%, transparent 12%);
   color: var(--text-strong);
+}
+
+.codeSample {
+  margin: 0;
+  overflow: hidden;
+}
+
+.codeCaption {
+  padding: 0.9rem 1rem 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
 }
 
 .mermaidBlock {
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.06);
+  background: color-mix(in oklab, var(--surface) 92%, transparent 8%);
   color: var(--text);
+}
+
+.mermaidCard {
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface) 94%, transparent 6%),
+    color-mix(in oklab, var(--page-background) 82%, transparent 18%)
+  );
+}
+
+.mermaidHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem 0;
+}
+
+.mermaidStatus {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+
+.mermaidShell {
+  position: relative;
+  min-height: 14rem;
+  padding: 1rem;
+  background: color-mix(in oklab, var(--surface) 92%, transparent 8%);
+}
+
+.mermaidShell :global(svg) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mermaidLoading {
+  position: relative;
+  overflow: hidden;
+  min-height: 12rem;
+  border-radius: calc(var(--radius-md) - 0.25rem);
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--surface) 94%, transparent 6%), color-mix(in oklab, var(--sea-abyss) 72%, transparent 28%)),
+    radial-gradient(circle at top left, color-mix(in oklab, var(--accent) 18%, transparent 82%), transparent 42%);
+}
+
+.mermaidLoading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, white 12%, transparent 88%), transparent);
+  animation: viz-shimmer 1.8s linear infinite;
 }
 
 .statGrid {
@@ -52,7 +202,11 @@
 
 .statTile {
   padding: 1rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface) 94%, transparent 6%),
+    color-mix(in oklab, var(--page-background) 80%, transparent 20%)
+  );
 }
 
 .statValue {
@@ -75,6 +229,23 @@
   gap: 1rem;
 }
 
+.timelineEvent {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.timelineEvent::before {
+  content: "";
+  position: absolute;
+  top: 0.42rem;
+  left: -1.4rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: var(--glow-cyan);
+}
+
 .timelineTime {
   color: var(--accent);
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -87,14 +258,119 @@
   color: var(--text);
 }
 
+.scrollDemo {
+  min-height: 180vh;
+}
+
+.scrollDemoStage {
+  position: sticky;
+  top: 1rem;
+}
+
+.scrollDemoRail {
+  position: relative;
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.scrollDemoSpine {
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  left: 0.38rem;
+  width: 1px;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 45%, transparent 55%), transparent);
+}
+
+.scrollDemoStep {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1rem 1fr;
+  gap: 1rem;
+  align-items: start;
+  transform-origin: center left;
+}
+
+.scrollDemoStepBody {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid color-mix(in oklab, var(--rule) 82%, var(--accent) 18%);
+  border-radius: var(--radius-md);
+  background: color-mix(in oklab, var(--sea-abyss) 42%, transparent 58%);
+  backdrop-filter: blur(10px);
+}
+
+.scrollDemoMarker {
+  position: relative;
+  overflow: hidden;
+  width: 0.85rem;
+  min-height: 4.5rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 96%, transparent 4%);
+  border: 1px solid var(--rule);
+}
+
+.scrollDemoMarkerFill {
+  position: absolute;
+  inset: 0;
+  transform-origin: bottom center;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 55%, white 45%), var(--accent));
+}
+
+.progressCard {
+  padding: 1rem;
+  background: color-mix(in oklab, var(--surface) 88%, transparent 12%);
+  --viz-tint: var(--accent);
+}
+
+.progressHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.progressLabel {
+  color: var(--text-strong);
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
 .progressShell {
   overflow: hidden;
   padding: 0.25rem;
-  background: rgba(255, 255, 255, 0.06);
+  background: color-mix(in oklab, var(--surface) 92%, transparent 8%);
 }
 
 .progressBar {
   height: 0.75rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--bio-cyan), var(--bio-violet));
+  transform-origin: left center;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--viz-tint) 35%, white 65%), var(--viz-tint));
+}
+
+@keyframes viz-shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 767px) {
+  .scrollDemo {
+    min-height: auto;
+  }
+
+  .scrollDemoStage {
+    position: static;
+  }
+
+  .scrollDemoHeader,
+  .mermaidHeader {
+    align-items: flex-start;
+  }
 }

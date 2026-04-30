@@ -52,19 +52,73 @@ function renderViz(lang: string | undefined, source: string, key: number): React
   }
 }
 
+function parseFenceStart(line: string) {
+  const match = line.match(/^(`{3,}|~{3,})([\w-]+)?\s*$/);
+  if (!match) {
+    return null;
+  }
+
+  return {
+    marker: match[1],
+    lang: match[2],
+  };
+}
+
+function splitMarkdownBlocks(source: string) {
+  const lines = source.split("\n");
+  const blocks: string[] = [];
+  let current: string[] = [];
+  let openFence: string | null = null;
+
+  lines.forEach((line) => {
+    const fenceStart = parseFenceStart(line.trim());
+    if (!openFence && fenceStart) {
+      openFence = fenceStart.marker;
+      current.push(line);
+      return;
+    }
+
+    if (openFence && line.trim() === openFence) {
+      current.push(line);
+      openFence = null;
+      if (current.length) {
+        blocks.push(current.join("\n").trim());
+        current = [];
+      }
+      return;
+    }
+
+    if (!openFence && !line.trim()) {
+      if (current.length) {
+        blocks.push(current.join("\n").trim());
+        current = [];
+      }
+      return;
+    }
+
+    current.push(line);
+  });
+
+  if (current.length) {
+    blocks.push(current.join("\n").trim());
+  }
+
+  return blocks.filter(Boolean);
+}
+
 export function MarkdownRenderer({ children }: { children: string | ReactNode }) {
   if (typeof children !== "string") {
     return <div className={styles.root}>{children}</div>;
   }
 
   const resolveHeadingId = createHeadingIdFactory();
-  const blocks = children.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
+  const blocks = splitMarkdownBlocks(children);
   const output: ReactNode[] = [];
 
   blocks.forEach((block, index) => {
-    const fenceMatch = block.match(/^```([\w-]+)\n([\s\S]*?)\n```$/);
+    const fenceMatch = block.match(/^(`{3,}|~{3,})([\w-]+)\n([\s\S]*?)\n\1$/);
     if (fenceMatch) {
-      output.push(<Reveal key={index}>{renderViz(fenceMatch[1], fenceMatch[2], index)}</Reveal>);
+      output.push(<Reveal key={index}>{renderViz(fenceMatch[2], fenceMatch[3], index)}</Reveal>);
       return;
     }
 

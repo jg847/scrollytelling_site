@@ -47,6 +47,34 @@ Dawn | Mass descent back to the twilight depths
 Day | Hiding in the dim midwater, conserving energy
 ```
 
+```progress-bar
+label: Reader descent through the twilight layer
+tint: var(--bio-violet)
+```
+
+```scroll-demo
+title: Twilight descent compressed
+intro: This mini sticky stage condenses the same transition the full page is making as you move from surface glow to blackwater.
+steps: Surface shimmer | Blue haze | Bioluminescent midwater | Blackwater threshold
+```
+
+```mermaid
+flowchart TD
+  Surface[Surface light] --> Twilight[Blue twilight]
+  Twilight --> Silhouette[Predators track silhouettes]
+  Twilight --> Glow[Bioluminescence becomes useful]
+  Glow --> Midnight[No sunlight below 1000 m]
+```
+
+```code-sample
+title: Sonar log shorthand
+lang: txt
+
+17:42 - false bottom begins to rise with dusk
+21:10 - lanternfish layer reaches the feeding band
+05:02 - deep scattering layer sinks below the sonar beam
+```
+
 ---
 
 ## Why bioluminescence works here

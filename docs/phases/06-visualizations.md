@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 phase: 06
 title: Visualizations
 depends-on: [05]
@@ -60,4 +60,8 @@ Enable fenced-code-block dispatch in `MarkdownRenderer`: authors embed interacti
 
 ## Completion notes
 
-<!-- Filled in after execution -->
+- Added a shared visualization parse/error contract in `src/components/visualization/_shared/` and converted the v1 visualization set to use it.
+- Replaced placeholder implementations for `StatGrid`, `ScrollDemo`, `Timeline`, `ProgressBar`, `Mermaid`, and `CodeSample` with parser-backed components and live dysphotic-zone content.
+- Fixed `MarkdownRenderer` block splitting so fenced code blocks with internal blank lines render correctly.
+- Added focused unit coverage for visualization parsers and malformed-input error cards, plus browser coverage for live dysphotic visualization rendering.
+- Validation passed with `npm run test`, `npm run build`, and `npm run test:e2e`.

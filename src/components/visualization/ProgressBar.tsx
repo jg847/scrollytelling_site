@@ -1,10 +1,47 @@
+"use client";
+
+import type { CSSProperties } from "react";
+import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import styles from "./VisualizationPrimitives.module.css";
+import { VizParseError, parseKeyValueSource, parseRequiredValue, renderVizWithContract } from "./_shared/viz-contract";
+
+type ProgressBarModel = {
+  label: string;
+  tint?: string;
+};
+
+export function parseProgressBarSource(source: string): ProgressBarModel {
+  const values = parseKeyValueSource(source);
+  const label = parseRequiredValue(values.label, "label");
+  const tint = values.tint?.trim();
+  if (tint && !/^var\(--[\w-]+\)$/.test(tint)) {
+    throw new VizParseError("Tint must be a CSS variable like var(--accent).");
+  }
+
+  return { label, tint };
+}
 
 export function ProgressBar({ source }: { source: string }) {
-  const value = Math.max(0, Math.min(100, Number(source.trim()) || 0));
+  return renderVizWithContract(source, parseProgressBarSource, (progress) => <ProgressBarBody progress={progress} />);
+}
+
+function ProgressBarBody({ progress }: { progress: ProgressBarModel }) {
+  const { scrollYProgress } = useScroll();
+  const reducedMotion = useReducedMotion();
+  const scaleX = reducedMotion
+    ? scrollYProgress
+    : useSpring(scrollYProgress, { stiffness: 110, damping: 28, restDelta: 0.001 });
+  const style = progress.tint ? ({ "--viz-tint": progress.tint } as CSSProperties) : undefined;
+
   return (
-    <div className={styles.progressShell}>
-      <div className={styles.progressBar} style={{ width: `${value}%` }} />
-    </div>
+    <section className={styles.progressCard} data-viz="progress-bar" style={style}>
+      <div className={styles.progressHeader}>
+        <p className={styles.vizEyebrow}>Page progress</p>
+        <p className={styles.progressLabel}>{progress.label}</p>
+      </div>
+      <div className={styles.progressShell}>
+        <motion.div className={styles.progressBar} style={{ scaleX }} />
+      </div>
+    </section>
   );
 }
