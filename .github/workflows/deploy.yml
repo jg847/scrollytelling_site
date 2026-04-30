@@ -94,12 +94,12 @@ jobs:
 
       - name: Build for browser tests
         env:
-          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_BASE_PATH: ""
         run: npm run build
 
       - name: Run Playwright tests
         env:
-          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_BASE_PATH: ""
         run: npm run test:e2e
 
       - name: Upload Playwright report on failure
