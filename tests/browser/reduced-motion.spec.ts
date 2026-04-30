@@ -7,7 +7,7 @@ test("reduced motion still renders content", async ({ page }) => {
   await expect.poll(async () => {
     return page.evaluate(() => window.getComputedStyle(document.documentElement).scrollBehavior);
   }).toBe("auto");
-  const sectionHeading = page.getByRole("heading", { level: 2, name: "Where the light still reaches" });
+  const sectionHeading = page.getByRole("heading", { level: 3, name: "Where the light still reaches" });
   await expect(sectionHeading).toBeVisible();
   const motionStyles = await readNearestMotionWrapper(sectionHeading);
   expect(motionStyles).toBeNull();
