@@ -1,21 +1,23 @@
 ---
-title: "Scrolly"
-layout: "standard"
-summary: "A teaching site about scrollytelling on the web, built with a spec-driven workflow."
+title: "Into The Deep"
+layout: "presentation"
+summary: "A scroll through the five layers of the ocean. From sunlit surface to the dark trenches that crush submarines."
+seo:
+  title: "Into the Deep — A Tour of the Ocean's Layers"
+  description: "Welcome to the tour! Ready to take a dive into the deep ocean? Scroll down through the Sunlight Zone, The Twilight Zone, The Midnight Zone, The Abyssal Zone, and The Hadal Zone."
 ---
+Welcome to the tour. Ready to take a dive into the ocean?
 
-Scrolly is a small, file-based teaching site.
+Below your feet, the water doesn't just get deeper — it changes. Light fades. Pressure builds. Familiar fish give way to creatures that make their own light, and then to creatures that have never seen any.
 
-It shows how to build long-form scrollytelling pages with Markdown content, static export, and a layout system that keeps the authoring surface small.
+We'll descend through five zones, one page at a time.
 
-## What to read first
+## The five layers
 
-- [Getting Started](/getting-started)
-- [Sticky Slides](/sticky-slides)
+- [Euphotic Zone — Sunlight](/euphotic) — surface to 200 m
+- [Dysphotic  Zone — Twilight](/dysphotic) — 200 to 1,000 m
+- [Aphotic  Zone — Midnight](/aphotic) — 1,000 to 4,000 m
+- [Abyssal  Zone — Abyss](/abyssal) — 4,000 to 6,000 m
+- [Hadal Zone — Trenches](/hadal) — 6,000 m and below
 
-## What this site demonstrates
-
-- Markdown content as the source of truth
-- A standard layout for reading pages
-- A presentation layout for slide-style stories
-- Build-time validation and static deployment
+Start with the Sunlight Zone and keep scrolling.
