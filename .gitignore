@@ -40,6 +40,9 @@ yarn-error.log*
 /C:\Users\jeanp\AppData\Local\lighthouse
 **/C:\Users\jeanp\AppData\Local\lighthouse
 
+# lighthouse
+.lighthouse
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
