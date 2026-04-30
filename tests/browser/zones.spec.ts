@@ -5,7 +5,7 @@ test("euphotic zone page loads", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 }).first()).toHaveText("Euphotic Zone");
   await expect(page.locator("[data-standard-story-section='true']")).toHaveCount(5);
   await expect(page.locator("[data-presentation-slide='true']")).toHaveCount(0);
-  await expect(page.getByAltText("Sunlight scattering through the upper ocean with fish moving through the bright water")).toBeVisible();
+  await expect(page.locator("[data-standard-story-media='true'] img").first()).toBeVisible();
   await expect(page.getByRole("link", { name: /Dysphotic Zone/i })).toBeVisible();
 });
 

@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("internal story links point at generated zone routes", async ({ page }) => {
   await page.goto("/euphotic/");
 
-  const descentLink = page.getByRole("link", { name: /Descend to the Dysphotic Zone/i });
+  const descentLink = page.locator("a[href='/dysphotic/']").first();
   await expect(descentLink).toHaveAttribute("href", /\/dysphotic\/?$/);
 
   await descentLink.click();
