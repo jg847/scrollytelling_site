@@ -45,6 +45,7 @@ The content is organized as follows:
     deploy.yml
 content/
   pages/
+    eupothic.md
     getting-started.md
     sticky-slides.md
   home.md
@@ -223,6 +224,45 @@ vitest.config.ts
 <files>
 This section contains the contents of the repository's files.
 
+<file path="content/pages/eupothic.md">
+---
+title: "Euphotic Zone"
+layout: "presentation"
+summary: "The Sunlight Zone — surface to 200 meters. Where the ocean glows green-blue and almost everything you've ever seen on a nature show lives."
+order: 1
+seo:
+  title: "Euphotic Zone — The Sunlight Layer"
+  description: "Surface to 200 meters. Photosynthesis, phytoplankton, and the bulk of marine life all live in this thin lit layer."
+---
+
+## Where the light still reaches
+
+You're floating just below the surface. Above you: sky. Below you: 200 meters of water that sunlight can still punch through. This thin band — the top 5% of the average ocean's depth — is where roughly **90% of marine species** live.
+
+The word *euphotic* comes from Greek: *eu* (well) + *photos* (light). Well-lit. Everything down here runs on sunlight, directly or one trophic level removed.
+
+## What lives here
+
+```stat-grid
+~90% | of marine species
+200 m | depth limit of photosynthesis
+~50% | of Earth's oxygen produced here
+~15 °C | average surface temperature
+```
+
+Phytoplankton drift in the upper meters and do most of that oxygen-making. Zooplankton graze on them. Schooling fish — sardines, anchovies, mackerel — eat the zooplankton. Tuna and sharks eat the schooling fish. Dolphins, sea lions, and most whales feed in this layer or pass through it. Sea turtles cruise it. Jellyfish pulse along on currents. Coral reefs, despite living on the seafloor, only exist where that seafloor is shallow enough to stay inside the euphotic zone — they need the sun.
+
+## Why it matters
+
+If the euphotic zone collapsed, the rest of the ocean would follow within a few decades. Every layer below depends on dead and dying organic matter drifting down from here — what oceanographers call **marine snow**. The deep ocean is, in a real sense, fed by leftovers from the sunlight zone.
+
+## Keep going
+
+The light is about to fade. Below 200 meters, photosynthesis stops being possible. Welcome to twilight.
+
+[Descend to the Dysphotic Zone →](/dysphotic)
+</file>
+
 <file path=".github/workflows/deploy.yml">
 name: Deploy Next.js site to Pages
 
@@ -285,18 +325,6 @@ jobs:
         uses: actions/deploy-pages@v4
 </file>
 
-<file path="content/pages/getting-started.md">
----
-title: "Getting Started"
-layout: "standard"
-summary: "A starter page for the spec-driven Scrolly site."
----
-
-# Getting Started
-
-This page exists so the content repository has at least one generated slug.
-</file>
-
 <file path="content/pages/sticky-slides.md">
 ---
 title: "Sticky Slides"
@@ -313,30 +341,6 @@ This is the first slide.
 ## Slide Two
 
 This is the second slide.
-</file>
-
-<file path="content/home.md">
----
-title: "Scrolly"
-layout: "standard"
-summary: "A teaching site about scrollytelling on the web, built with a spec-driven workflow."
----
-
-Scrolly is a small, file-based teaching site.
-
-It shows how to build long-form scrollytelling pages with Markdown content, static export, and a layout system that keeps the authoring surface small.
-
-## What to read first
-
-- [Getting Started](/getting-started)
-- [Sticky Slides](/sticky-slides)
-
-## What this site demonstrates
-
-- Markdown content as the source of truth
-- A standard layout for reading pages
-- A presentation layout for slide-style stories
-- Build-time validation and static deployment
 </file>
 
 <file path="docs/guide/01-the-stack.md">
@@ -3736,7 +3740,7 @@ import { test, expect } from "@playwright/test";
 
 test("homepage loads", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 }).first()).toHaveText("Scrolly");
+  await expect(page.getByRole("heading", { level: 1 }).first()).toHaveText("Into The Deep");
 });
 </file>
 
@@ -3943,6 +3947,58 @@ export default defineConfig({
     },
   },
 });
+</file>
+
+<file path="content/pages/getting-started.md">
+---
+title: "Into The Deep"
+layout: "presentation"
+summary: "A scroll through the five layers of the ocean. From sunlit surface to the dark trenches that crush submarines."
+seo:
+  title: "Into the Deep — A Tour of the Ocean's Layers"
+  description: "Welcome to the tour! Ready to take a dive into the deep ocean? Scroll down through the Sunlight Zone, The Twilight Zone, The Midnight Zone, The Abyssal Zone, and The Hadal Zone."
+---
+Welcome to the tour. Ready to take a dive into the ocean?
+
+Below your feet, the water doesn't just get deeper — it changes. Light fades. Pressure builds. Familiar fish give way to creatures that make their own light, and then to creatures that have never seen any.
+
+We'll descend through five zones, one page at a time.
+
+## The five layers
+
+- [Euphotic Zone — Sunlight](/euphotic) — surface to 200 m
+- [Dysphotic  Zone — Twilight](/dysphotic) — 200 to 1,000 m
+- [Aphotic  Zone — Midnight](/aphotic) — 1,000 to 4,000 m
+- [Abyssal  Zone — Abyss](/abyssal) — 4,000 to 6,000 m
+- [Hadal Zone — Trenches](/hadal) — 6,000 m and below
+
+Start with the Sunlight Zone and keep scrolling.
+</file>
+
+<file path="content/home.md">
+---
+title: "Into The Deep"
+layout: "presentation"
+summary: "A scroll through the five layers of the ocean. From sunlit surface to the dark trenches that crush submarines."
+seo:
+  title: "Into the Deep — A Tour of the Ocean's Layers"
+  description: "Welcome to the tour! Ready to take a dive into the deep ocean? Scroll down through the Sunlight Zone, The Twilight Zone, The Midnight Zone, The Abyssal Zone, and The Hadal Zone."
+---
+Welcome to the tour. Ready to take a dive into the ocean?
+
+Below your feet, the water doesn't just get deeper — it changes. Light fades. Pressure builds. Familiar fish give way to creatures that make their own light, and then to creatures that have never seen any.
+
+We'll descend through five zones, one page at a time.
+
+## The five layers
+
+- [Euphotic Zone — Sunlight](/euphotic) — surface to 200 m
+- [Dysphotic  Zone — Twilight](/dysphotic) — 200 to 1,000 m
+- [Aphotic  Zone — Midnight](/aphotic) — 1,000 to 4,000 m
+- [Abyssal  Zone — Abyss](/abyssal) — 4,000 to 6,000 m
+- [Hadal Zone — Trenches](/hadal) — 6,000 m and below
+
+Start with the Sunlight Zone and keep scrolling.
 </file>
 
 <file path="docs/guide/08-a-real-run.md">
