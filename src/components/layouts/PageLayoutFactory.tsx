@@ -1,5 +1,4 @@
 import type { PageData } from "@/lib/content/repository";
-import { MarkdownRenderer } from "@/components/markdown/MarkdownRenderer";
 import { PresentationLayout } from "./PresentationLayout";
 import { StandardLayout } from "./StandardLayout";
 

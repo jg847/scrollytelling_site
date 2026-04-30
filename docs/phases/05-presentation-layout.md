@@ -8,7 +8,7 @@ depends-on: [04]
 # Phase 05 — Presentation layout
 
 ## Objective
-Activate the sticky-slide presentation mode. Pages with `layout: "presentation"` split on `---`, each fragment renders inside a `PresentationSlide` whose `SlideContext` auto-switches every nested `Reveal`/`DriftMedia`/`SceneCard` into slide mode.
+Activate the sticky-slide presentation mode for the ocean descent. Pages with `layout: "presentation"` split on `---`, each fragment renders inside a `PresentationSlide` whose `SlideContext` auto-switches every nested `Reveal`/`DriftMedia`/`SceneCard` into slide mode.
 
 ## Spec references
 - [specs/04-layouts.md](../specs/04-layouts.md) §`PresentationLayout`
@@ -39,7 +39,7 @@ Activate the sticky-slide presentation mode. Pages with `layout: "presentation"`
 6. **Shortcut overlay.** `?` toggles an overlay listing keys. Focus-trap via `inert` on the rest of the page.
 7. **Verify the dual-mode story.** Inside a `PresentationSlide`, a `Reveal` should animate based on scroll position (not viewport entry). Visually confirm and add an E2E check.
 8. **E2E tests.**
-   - `presentation.spec.ts` — load `/sticky-slides`, assert N sections, scroll to end, assert footer gate visible.
+   - `presentation.spec.ts` — load `/euphotic`, assert N sections, scroll to end, assert footer gate visible.
    - `presentation-keyboard.spec.ts` — `ArrowDown` advances scroll by ~one viewport; `Home` returns to 0.
 
 ## Files created / modified
@@ -52,10 +52,10 @@ Activate the sticky-slide presentation mode. Pages with `layout: "presentation"`
 - `src/components/layouts/PresentationLayout.tsx` (+ `.module.css`)
 - `src/components/layouts/PageLayoutFactory.tsx` — finalize presentation branch
 - `tests/browser/presentation.spec.ts`, `presentation-keyboard.spec.ts`
-- `content/pages/sticky-slides.md` — expand to demonstrate plain/bg/split variants
+- `content/pages/euphotic.md` — expand to demonstrate plain/bg/split variants in the first live zone page
 
 ## Exit checks
-- [ ] `/sticky-slides` renders as a vertical deck with progress bar
+- [ ] `/euphotic` renders as a vertical deck with progress bar
 - [ ] Each slide sticks for ~1 viewport of scroll
 - [ ] Nested `Reveal`/`DriftMedia` inside a slide are scrubbed by scroll, not triggered by intersection
 - [ ] `ArrowDown` / `ArrowUp` advance/retreat one slide

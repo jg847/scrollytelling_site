@@ -1,6 +1,6 @@
 # 05 — Design system
 
-Minimal, token-driven, CSS Modules. No utility-CSS framework.
+Token-driven, CSS Modules. No utility-CSS framework. The palette is built around a single idea: **the further down the reader scrolls, the deeper and darker the world becomes.** Tokens are not just static — many of them interpolate against a `--depth` custom property that the page updates as the reader scrolls.
 
 ## Decisions
 
@@ -8,43 +8,86 @@ Minimal, token-driven, CSS Modules. No utility-CSS framework.
 - **No CSS-in-JS.** No styled-components, no Emotion.
 - **CSS Modules** per component (`Foo.module.css` co-located with `Foo.tsx`).
 - **Design tokens** live as CSS custom properties in `src/app/globals.css`.
-- **Fluid everything.** Type scales with `clamp()`; spacing uses a 24px baseline.
+- **A scroll-driven `--depth` variable** drives ambient theming. Set on `<body>` from a single window-level `useScroll` hook in a top-level provider.
+- **Fluid everything.** Type scales with `clamp()`; spacing uses a 24 px baseline.
+
+## The depth axis
+
+A single unit-interval custom property captures where the reader is in the descent.
+
+```css
+:root {
+  --depth: 0;            /* 0 at the surface, 1 in the hadal trench */
+}
+```
+
+Every depth-aware token reads from `--depth`. The value is updated once per frame from a `useScroll` `MotionValue` in a top-level provider; CSS interpolates the rest.
+
+Per-zone pages also set a discrete `--zone` attribute on `<body>`:
+
+```html
+<body data-zone="dysphotic">…</body>
+```
+
+so tokens can be specialised per zone in addition to the continuous depth interpolation.
 
 ## Tokens (globals.css)
 
 ```css
 :root {
-  /* Color */
-  --page-background: #f5f1ea;
-  --surface:         #fffdf9;
-  --surface-ink:     #1f1a16;
-  --text:            #1f1a16;
-  --text-muted:      #5a4f45;
-  --accent:          #8d4e2f;
-  --accent-strong:   #6f391e;
-  --rule:            rgba(31, 26, 22, 0.12);
+  /* Depth axis — defaulted; overridden per zone & by the scroll provider */
+  --depth: 0;
 
-  /* Typography — golden ratio scale */
-  --phi: 1.618;
+  /* Color — anchor stops along the descent */
+  --sea-surface:  #4ea7c8;   /* sunlit blue-cyan */
+  --sea-twilight: #1d4f7a;   /* twilight indigo */
+  --sea-midnight: #0a1f3d;   /* midnight navy */
+  --sea-abyss:    #02060f;   /* near-black with a hint of blue */
+  --sea-hadal:    #000000;   /* black */
+
+  /* Background blends along the depth axis */
+  --page-background: color-mix(
+    in oklab,
+    var(--sea-surface)  calc((1 - var(--depth)) * 100%),
+    var(--sea-abyss)    calc(var(--depth) * 100%)
+  );
+  --surface:           rgba(255, 255, 255, 0.04);
+  --rule:              rgba(255, 255, 255, 0.10);
+
+  /* Text */
+  --text:        #e9f2f7;
+  --text-muted:  #9fb3c0;
+  --text-strong: #ffffff;
+
+  /* Bioluminescent accents */
+  --bio-cyan:    #6ef0ff;
+  --bio-green:   #7cf2b0;
+  --bio-violet:  #b48cff;
+  --bio-magenta: #ff5fb1;
+  --accent:      var(--bio-cyan);
+  --accent-strong: #b6fbff;
+
+  /* Typography — measured, science-forward */
   --fluid-min-px: 16;
-  --fluid-max-px: 20;
+  --fluid-max-px: 19;
   --fluid-scaler: calc(
     var(--fluid-min-px) * 1px
     + (var(--fluid-max-px) - var(--fluid-min-px)) * ((100vw - 360px) / (1280 - 360))
   );
-  --text-base: clamp(16px, var(--fluid-scaler), 20px);
-  --text-h3:   calc(var(--text-base) * var(--phi));
-  --text-h2:   calc(var(--text-h3)   * var(--phi));
-  --text-h1:   calc(var(--text-h2)   * var(--phi));
-  --text-small: calc(var(--text-base) / var(--phi));
+  --text-base:    clamp(16px, var(--fluid-scaler), 19px);
+  --text-h4:      calc(var(--text-base) * 1.15);
+  --text-h3:      calc(var(--text-base) * 1.4);
+  --text-h2:      calc(var(--text-base) * 1.85);
+  --text-h1:      calc(var(--text-base) * 2.6);
+  --text-display: clamp(2.4rem, 5.4vw, 4.8rem);
+  --text-small:   calc(var(--text-base) * 0.86);
 
-  /* Algorithmic weight decay: bigger = lighter */
-  --wght-base: 450;
-  --wght-h3:   calc(var(--wght-base) / var(--phi));
-  --wght-h2:   calc(var(--wght-h3)   / var(--phi));
-  --wght-h1:   calc(var(--wght-h2)   / 1.3);
+  /* Weights */
+  --wght-base: 400;
+  --wght-h2:   500;
+  --wght-h1:   600;
 
-  /* Spacing — 24px baseline */
+  /* Spacing — 24 px baseline */
   --baseline: 24px;
   --space-0_5x: calc(var(--baseline) * 0.5);
   --space-1x:   var(--baseline);
@@ -53,29 +96,16 @@ Minimal, token-driven, CSS Modules. No utility-CSS framework.
   --space-4x:   calc(var(--baseline) * 4);
   --space-5x:   calc(var(--baseline) * 5);
 
-  /* Slide typography (presentation layout) */
-  --slide-display:  clamp(2.2rem, 3.8vw, 4rem);
-  --slide-eyebrow:  clamp(0.9rem, 1vw, 1.05rem);
-  --slide-body:     clamp(1rem, 1.25vw, 1.2rem);
-  --slide-line:     1.45;
-  --slide-measure:  60ch;
+  /* Reading column */
+  --read-measure: 64ch;
 
-  /* Cream alpha ramp (for glass UI on dark) */
-  --cream-12: rgba(255, 248, 239, 0.12);
-  --cream-22: rgba(255, 248, 239, 0.22);
-  --cream-48: rgba(255, 248, 239, 0.48);
-  --cream-72: rgba(255, 248, 239, 0.72);
-  --cream-96: rgba(255, 248, 239, 0.96);
-
-  /* Ink alpha ramp (for glass UI on light) */
-  --ink-08: rgba(31, 26, 22, 0.08);
-  --ink-16: rgba(31, 26, 22, 0.16);
-  --ink-32: rgba(31, 26, 22, 0.32);
-  --ink-64: rgba(31, 26, 22, 0.64);
+  /* Glow halos for bioluminescent UI */
+  --glow-cyan:    0 0 24px rgba(110, 240, 255, 0.45);
+  --glow-violet:  0 0 22px rgba(180, 140, 255, 0.45);
 
   /* Shadows */
-  --shadow-sm: 0 12px 30px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 12px 30px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.7);
 
   /* Motion */
   --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
@@ -90,67 +120,84 @@ Minimal, token-driven, CSS Modules. No utility-CSS framework.
   --z-modal: 100;
 }
 
+/* Per-zone overrides — slugs match content/pages/<slug>.md */
+body[data-zone="euphotic"]  { --accent: var(--bio-cyan);    --depth-base: 0.05; }
+body[data-zone="dysphotic"] { --accent: var(--bio-violet);  --depth-base: 0.30; }
+body[data-zone="aphotic"]   { --accent: var(--bio-green);   --depth-base: 0.55; }
+body[data-zone="abyssal"]   { --accent: var(--bio-magenta); --depth-base: 0.80; }
+body[data-zone="hadal"]     { --accent: #ffffff;            --depth-base: 0.95; }
+
 @media (prefers-reduced-motion: reduce) {
   :root { --dur-quick: 0ms; --dur-base: 0ms; --dur-slow: 0ms; }
 }
 
 html, body { background: var(--page-background); color: var(--text); }
-body { font-size: var(--text-base); line-height: 1.55; }
+body { font-size: var(--text-base); line-height: 1.6; }
 ```
+
+The combination of a continuous `--depth` and a discrete `data-zone` keeps both per-zone styling (zone-specific accent colours, header treatments) and a global fade-to-black gradient working without conflict.
 
 ## Typography
 
-- **Display/headings:** Newsreader (serif), loaded as `--font-display` via `next/font/google`.
-- **Body:** Public Sans (sans-serif), loaded as `--font-sans`.
-- `display: "swap"` on both.
-
-Loaded in `src/app/layout.tsx`:
+- **Display/headings:** Fraunces (serif, optical sizing), loaded as `--font-display` via `next/font/google`. Cool, slightly modern serif suited to science writing.
+- **Body:** Inter (sans-serif), loaded as `--font-sans`. Clear at small sizes against dark backgrounds.
+- **Mono (data, depth readouts):** JetBrains Mono, `--font-mono`.
 
 ```tsx
-import { Public_Sans, Newsreader } from "next/font/google";
-const sans    = Public_Sans({ subsets: ["latin"], variable: "--font-sans",    display: "swap" });
-const display = Newsreader({  subsets: ["latin"], variable: "--font-display", display: "swap" });
-// <body className={`${sans.variable} ${display.variable}`}>
+import { Inter, Fraunces, JetBrains_Mono } from "next/font/google";
+
+const sans    = Inter({          subsets: ["latin"], variable: "--font-sans",    display: "swap" });
+const display = Fraunces({       subsets: ["latin"], variable: "--font-display", display: "swap" });
+const mono    = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono",    display: "swap" });
 ```
 
-`globals.css`:
-
 ```css
-body    { font-family: var(--font-sans), system-ui, sans-serif; }
-h1,h2,h3,h4 { font-family: var(--font-display), Georgia, serif; }
+body         { font-family: var(--font-sans), system-ui, sans-serif; }
+h1,h2,h3,h4  { font-family: var(--font-display), Georgia, serif; letter-spacing: -0.01em; }
+.depth-readout, .pressure-readout, .temp-readout {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
 ```
 
 ## Component primitives
 
 `src/components/ui/`:
 
-- `Heading` — `level: 1|2|3|4`, renders the correct tag and applies the corresponding `--text-h*` / `--wght-h*` tokens.
+- `Heading` — `level: 1|2|3|4`; applies `--text-h*` and `--wght-h*`.
 - `Text` — `variant: "body" | "muted" | "eyebrow" | "small"`.
-- `ContextualLink` — internal (`next/link`) vs external (`<a target=_blank>`) auto-switch; adds basePath for internal links.
-- `CallToActionGroup` — layout wrapper for 1–3 CTA buttons.
+- `ContextualLink` — internal (`next/link`) vs external (`<a target=_blank>`); adds basePath for internal links. Underline by default; bioluminescent hover glow.
+- `CallToActionGroup` — layout wrapper for 1–3 CTAs.
+- `DataReadout` — small primitive for monospace numeric data (depth, pressure, temperature). Used by `DepthGauge` and `ZoneStats`.
+- `ZoneNavigator` — bottom-of-page "↑ back" / "continue descent →" navigation. Reads `descentOrder` from frontmatter and resolves the previous and next zone slugs at build time.
 
-Each has its own `.module.css`. No className props for layout — consumers wrap in their own container.
+Each has its own `.module.css`. No `className` props for layout — consumers wrap in their own container.
 
 ## Layout CSS modules
 
-- `StandardLayout.module.css` — hero grid, reading-column max-width, sticky ToC.
-- `PresentationLayout.module.css` — progress bar, footer gate, split-slide grid.
+- `StandardLayout.module.css` — hero, reading-column max-width, sticky table-of-contents, slot for the `DepthGauge` aside, slot for `ZoneNavigator` at the foot.
+- `PresentationLayout.module.css` — kept for portability; not used by any v1 zone page.
 
-Naming: **BEM-like** inside modules (`.root`, `.hero`, `.hero__copy`, `.hero--dense`). CSS Modules scope the class names; BEM is only for readability.
+Naming: BEM-like inside modules (`.root`, `.hero`, `.hero__copy`, `.hero--dense`). CSS Modules scope the class names; BEM is only for readability.
 
 ## Imagery
 
-- Prefer `.webp` at ≤ 1600px wide, ≤ 500KB.
+Most zone pages lean on photography or rendered illustration of marine life and water columns.
+
+- Prefer `.webp` at ≤ 1600 px wide, ≤ 500 KB.
 - Hero images: 16:9 or 21:9.
-- Portrait images: 3:4.
-- All `<img>` inside motion components must have explicit `width`/`height`.
+- Species cards: 4:3 or 1:1.
+- Rendered abyssal scenes can carry a slight cyan/violet rim light to read against the deep background.
+- All `<img>` inside motion components must have explicit `width`/`height` to prevent layout shift.
+- Always provide a meaningful `alt` — e.g. *"A bigfin reef squid hovering in the open water column"*, not *"squid"*.
 
 ## Icons
 
-SVG only, inline via React components in `src/components/ui/icons/`. No icon font.
+SVG only, inline via React components in `src/components/ui/icons/`. No icon font. Bioluminescent accent colour is allowed on icons that represent active state.
 
 ## Accessibility tokens
 
-- Minimum body contrast: 7:1 against `--page-background`.
-- Focus ring: `outline: 2px solid var(--accent); outline-offset: 2px;` on all interactive elements. Never `outline: none` without replacing.
-- Touch target ≥ 44×44px.
+- Minimum body contrast: 7:1 against the **current** `--page-background`. Because background depth-shifts, this is verified at three sample depths (`0.0`, `0.5`, `1.0`) in the design audit.
+- Focus ring: `outline: 2px solid var(--accent); outline-offset: 2px; box-shadow: var(--glow-cyan);` on all interactive elements. Never `outline: none` without replacing.
+- Touch target ≥ 44×44 px.
+- Bioluminescent glow effects (`box-shadow`) are decorative only — never the sole indicator of focus or state.

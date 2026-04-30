@@ -8,11 +8,15 @@ seo:
   description: "200 to 1,000 meters down. Where sunlight runs out, bioluminescence takes over, and the largest animal migration on Earth happens every night."
 ---
 
+![bg 50% 35%](/images/ocean/dysphotic-zone.webp)
+
 ## The light runs out
 
 At 200 meters, you cross an invisible line. Above it, plants can still photosynthesize — barely. Below it, they can't. *Dysphotic* literally means "poorly lit." Within another hundred meters, the world fades to a deep, even blue. By 1,000 meters, only about **one-billionth of surface light** is left.
 
 There's no horizon down here. No up, no down, no shadow direction. Just a soft glow from above that gets fainter as you sink.
+
+---
 
 ## What lives here
 
@@ -28,6 +32,8 @@ Almost everything here is small, dark-colored, and silver-bellied. The silver be
 
 You'll find **lanternfish** (so abundant they may make up 65% of all deep-sea fish biomass), **hatchetfish** with their upturned tubular eyes, **bristlemouths** (genus *Cyclothone* — possibly the most numerous vertebrates on Earth), **viperfish**, **vampire squid**, and the occasional **swordfish** hunting through. **Sperm whales** dive down through this layer to hunt giant squid even deeper.
 
+---
+
 ## The biggest commute on Earth
 
 Every single night, billions of these creatures swim *up* into the Euphotic Zone to feed under cover of darkness, then descend back at dawn to hide. Biologists call it the **diel vertical migration**. It's the largest daily movement of biomass on the planet — and it was a mystery for decades because sonar operators kept seeing a "false bottom" that rose at sunset and sank at sunrise.
@@ -38,6 +44,8 @@ Night | Feeding in the surface layer above
 Dawn | Mass descent back to the twilight depths
 Day | Hiding in the dim midwater, conserving energy
 ```
+
+---
 
 ## Why bioluminescence works here
 

@@ -1,0 +1,13 @@
+.link {
+  color: var(--accent-strong);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+  transition:
+    color var(--dur-quick) var(--ease-brand),
+    text-shadow var(--dur-quick) var(--ease-brand);
+}
+
+.link:hover {
+  color: var(--text-strong);
+  text-shadow: var(--glow-cyan);
+}

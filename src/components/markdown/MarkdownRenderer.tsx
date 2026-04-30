@@ -1,12 +1,15 @@
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContextualLink } from "@/components/ui/ContextualLink";
+import { Heading } from "@/components/ui/Heading";
+import { Text } from "@/components/ui/Text";
 import { CodeSample } from "@/components/visualization/CodeSample";
 import { Mermaid } from "@/components/visualization/Mermaid";
 import { ProgressBar } from "@/components/visualization/ProgressBar";
 import { ScrollDemo } from "@/components/visualization/ScrollDemo";
 import { StatGrid } from "@/components/visualization/StatGrid";
 import { Timeline } from "@/components/visualization/Timeline";
+import styles from "./MarkdownRenderer.module.css";
 
 function renderMarkdownLine(line: string): ReactNode {
   const parts = line.split(/(\[[^\]]+\]\([^\)]+\))/g).filter(Boolean);
@@ -22,11 +25,11 @@ function renderMarkdownLine(line: string): ReactNode {
     return <span key={index}>{part}</span>;
   });
 
-  if (line.startsWith("# ")) return <h1 className="mb-4 text-4xl font-semibold tracking-tight">{line.slice(2)}</h1>;
-  if (line.startsWith("## ")) return <h2 className="mb-3 mt-10 text-2xl font-semibold tracking-tight">{line.slice(3)}</h2>;
-  if (line.startsWith("### ")) return <h3 className="mb-2 mt-8 text-xl font-semibold">{line.slice(4)}</h3>;
+  if (line.startsWith("# ")) return <Heading level={1}>{line.slice(2)}</Heading>;
+  if (line.startsWith("## ")) return <Heading level={2}>{line.slice(3)}</Heading>;
+  if (line.startsWith("### ")) return <Heading level={3}>{line.slice(4)}</Heading>;
   if (line.startsWith("- ")) return <li>{inline.slice(0)}</li>;
-  return <p className="mb-4 leading-7 text-slate-700">{inline}</p>;
+  return <Text>{inline}</Text>;
 }
 
 function renderViz(lang: string | undefined, source: string, key: number): ReactNode {
@@ -50,7 +53,7 @@ function renderViz(lang: string | undefined, source: string, key: number): React
 
 export function MarkdownRenderer({ children }: { children: string | ReactNode }) {
   if (typeof children !== "string") {
-    return <div className="prose prose-slate max-w-none">{children}</div>;
+    return <div className={styles.root}>{children}</div>;
   }
 
   const blocks = children.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
@@ -68,7 +71,7 @@ export function MarkdownRenderer({ children }: { children: string | ReactNode })
       if (lines[0].startsWith("- ")) {
         output.push(
           <Reveal key={index}>
-            <ul className="mb-6 ml-6 list-disc space-y-2">
+              <ul className={styles.list}>
               {lines.map((line, lineIndex) => <li key={lineIndex}>{line.slice(2)}</li>)}
             </ul>
           </Reveal>,
@@ -77,8 +80,12 @@ export function MarkdownRenderer({ children }: { children: string | ReactNode })
       }
     }
 
-    output.push(<Reveal key={index}><div>{renderMarkdownLine(block)}</div></Reveal>);
+      output.push(
+        <Reveal key={index}>
+          <div className={styles.block}>{renderMarkdownLine(block)}</div>
+        </Reveal>,
+      );
   });
 
-  return <div className="prose prose-slate max-w-none">{output}</div>;
+  return <div className={styles.root}>{output}</div>;
 }

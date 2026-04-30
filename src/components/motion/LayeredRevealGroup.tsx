@@ -3,10 +3,8 @@ import { Reveal } from "./Reveal";
 
 export function LayeredRevealGroup({
   children,
-  stagger = 0.08,
 }: {
   children: React.ReactNode;
-  stagger?: number;
 }) {
   const items = React.Children.toArray(children).filter(Boolean);
   return (

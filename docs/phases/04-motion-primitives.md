@@ -8,7 +8,7 @@ depends-on: [03]
 # Phase 04 — Motion primitives
 
 ## Objective
-Ship the dual-mode scrollytelling primitives. Integrate viewport-mode reveals into `MarkdownRenderer` so standard pages animate on scroll, respecting reduced-motion. No presentation layout yet — that's Phase 05.
+Ship the dual-mode scrollytelling primitives. Integrate reveal behavior into `MarkdownRenderer` so the shared renderer works immediately and is ready for the presentation-first ocean pages, while still respecting reduced-motion. Full sticky-slide orchestration lands in Phase 05.
 
 ## Spec references
 - [specs/03-motion-system.md](../specs/03-motion-system.md) — the canonical contract. Read in full before coding.
@@ -43,8 +43,8 @@ Ship the dual-mode scrollytelling primitives. Integrate viewport-mode reveals in
    - Port `docs/_references/bseai_degree/playwright.config.ts` to repo root, pointing `webServer` at `npx serve out -l 4321`.
    - Add `npm run test:e2e` script.
 10. **E2E tests.**
-    - `tests/browser/standard-reveal.spec.ts` — scroll down `/getting-started`; an initially off-screen `Reveal` element reaches `opacity: 1`.
-    - `tests/browser/reduced-motion.spec.ts` — `emulateMedia({ reducedMotion: "reduce" })`; same element is at `opacity: 1` at rest with no transform.
+   - `tests/browser/standard-reveal.spec.ts` — scroll down `/` or `/euphotic`; an initially off-screen `Reveal` element reaches `opacity: 1`.
+   - `tests/browser/reduced-motion.spec.ts` — `emulateMedia({ reducedMotion: "reduce" })`; same element is at `opacity: 1` at rest with no transform.
 
 ## Files created / modified
 
@@ -57,7 +57,7 @@ Ship the dual-mode scrollytelling primitives. Integrate viewport-mode reveals in
 - `package.json` (deps + scripts)
 
 ## Exit checks
-- [ ] `/getting-started` visibly fades sections in on scroll
+- [ ] `/` or `/euphotic` visibly fades sections in on scroll
 - [ ] With reduced motion emulated, content is at rest, fully visible
 - [ ] `npm run test` passes
 - [ ] `npm run build && npm run test:e2e` passes

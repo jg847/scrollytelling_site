@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { PageLayoutFactory } from "@/components/layouts/PageLayoutFactory";
+import { Heading } from "@/components/ui/Heading";
 import { getPagesRepo } from "@/lib/content/repository";
 
 export const dynamicParams = false;
@@ -24,5 +24,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   const { slug } = await params;
   if (!slug?.length) notFound();
   const page = await getPagesRepo().getPageBySlug(slug.join("/"));
-  return <PageLayoutFactory page={page} />;
+
+  return (
+    <main>
+      <Heading level={1}>{page.frontmatter.title}</Heading>
+      <pre>{page.content}</pre>
+    </main>
+  );
 }

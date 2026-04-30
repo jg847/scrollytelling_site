@@ -1,0 +1,33 @@
+.root {
+  min-height: 100vh;
+  display: grid;
+  gap: var(--space-2x);
+  align-content: center;
+  justify-items: center;
+  padding: var(--space-2x);
+}
+
+.panel {
+  width: min(100%, 44rem);
+  display: grid;
+  gap: var(--space-1x);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(16px);
+}
+
+.eyebrow {
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: var(--text-small);
+}
+
+.readouts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1x);
+}

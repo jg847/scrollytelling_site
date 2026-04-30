@@ -14,6 +14,8 @@ You're floating just below the surface. Above you: sky. Below you: 200 meters of
 
 The word *euphotic* comes from Greek: *eu* (well) + *photos* (light). Well-lit. Everything down here runs on sunlight, directly or one trophic level removed.
 
+---
+
 ## What lives here
 
 ```stat-grid
@@ -25,9 +27,13 @@ The word *euphotic* comes from Greek: *eu* (well) + *photos* (light). Well-lit. 
 
 Phytoplankton drift in the upper meters and do most of that oxygen-making. Zooplankton graze on them. Schooling fish — sardines, anchovies, mackerel — eat the zooplankton. Tuna and sharks eat the schooling fish. Dolphins, sea lions, and most whales feed in this layer or pass through it. Sea turtles cruise it. Jellyfish pulse along on currents. Coral reefs, despite living on the seafloor, only exist where that seafloor is shallow enough to stay inside the euphotic zone — they need the sun.
 
+---
+
 ## Why it matters
 
 If the euphotic zone collapsed, the rest of the ocean would follow within a few decades. Every layer below depends on dead and dying organic matter drifting down from here — what oceanographers call **marine snow**. The deep ocean is, in a real sense, fed by leftovers from the sunlight zone.
+
+---
 
 ## Keep going
 

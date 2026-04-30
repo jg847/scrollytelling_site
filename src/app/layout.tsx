@@ -1,21 +1,34 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { DepthThemeProvider } from "@/components/providers/DepthThemeProvider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sans = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const display = Fraunces({
+  variable: "--font-display",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Scrolly",
-  description:
-    "A teaching site about scrollytelling on the web, built with a spec-driven + phased AI workflow.",
+  title: "Into The Deep",
+  description: "A scroll-driven descent through the five layers of the open ocean.",
+  openGraph: {
+    title: "Into The Deep",
+    description: "Descend from the sunlit surface to the hadal trenches in a static scrollytelling site.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -24,8 +37,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${sans.variable} ${display.variable} ${mono.variable}`}>
+      <body>
+        <DepthThemeProvider>{children}</DepthThemeProvider>
+      </body>
     </html>
   );
 }

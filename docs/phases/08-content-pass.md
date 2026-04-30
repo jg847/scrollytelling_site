@@ -1,45 +1,45 @@
 ---
 status: pending
 phase: 08
-title: Content authoring pass
+title: Ocean content pass
 depends-on: [07]
 ---
 
-# Phase 08 — Content authoring pass
+# Phase 08 — Ocean content pass
 
 ## Objective
-With the kit hardened, write the actual teaching content. Each page teaches one concept and references the matching spec and phase file.
+With the kit hardened, finish the actual ocean descent content. Each page should read like one chapter in a continuous dive from the surface to the trenches.
 
 ## Spec references
 - [specs/00-overview.md](../specs/00-overview.md) — voice and scope
 - [specs/09-roadmap.md](../specs/09-roadmap.md) §"Milestone 8"
 
 ## Reference code
-No component code is ported in this phase. Reference the reference project's **prose style and structure** if useful, but all content must be original to Scrolly and topic-neutral (scrollytelling itself, not AI/education).
+No component code is ported in this phase. Reference the reference project's **prose structure** if useful, but all content must be original to the ocean narrative in this repo.
 
 ## Pages to write
 
 | Slug | Layout | Teaches | Anchors |
 |---|---|---|---|
-| `home.md` | standard | What Scrolly is; "read the series" | Hero + `StatGrid` + CTA group |
-| `what-is-scrollytelling.md` | standard | Definition, history, examples, when to use | `Timeline` + `ScrollDemo` |
-| `sticky-slides.md` (expand) | presentation | The sticky-stage pattern | `CodeSample` of `PresentationSlide`, `bg`, `split`, `split-reverse` variants |
-| `dual-mode-reveals.md` | standard | How `SlideContext` chooses `Viewport` vs `Slide` mode | `CodeSample`, inline `ScrollDemo`, `Mermaid` flowchart |
-| `writing-content.md` | standard | Authoring markdown + frontmatter + viz tags | `CodeSample` of sample frontmatter |
-| `deploying-to-pages.md` | standard | How the Actions workflow works, `basePath` | `CodeSample` of workflow YAML; link to the workflow file |
+| `home.md` | presentation | The invitation to descend; sets stakes, structure, and tone | Hero + `StatGrid` + CTA into `/euphotic` |
+| `euphotic.md` | presentation | Sunlight, photosynthesis, reefs, upper-ocean predators | `ZoneStats` + `SpeciesCard` + `DepthScene` |
+| `dysphotic.md` | presentation | Fading light, migration, bioluminescence | `LightScale` + `SpeciesCard` + `DepthScene` |
+| `aphotic.md` | presentation | Total darkness, marine snow, whale falls | `PressureCard` + `ZoneStats` + `SpeciesCard` |
+| `abyssal.md` | presentation | Seafloor plains, vents, chemosynthesis | `TemperatureCurve` + `DepthScene` + `SpeciesCard` |
+| `hadal.md` | presentation | Trenches, pressure limits, isolated ecosystems | `PressureCard` + `ZoneNavigator` + end-of-descent payoff |
 
 Each page:
 - Has SEO frontmatter.
-- Has 3–5 H2 sections.
-- Cross-links to the related spec file in `/docs/specs/` and the phase file in `/docs/phases/` via `<ContextualLink>`.
+- Has 3–6 slides or H2-led sections, depending on what best serves the story beat.
 - Uses at least one visualization tag.
+- Ends by orienting the reader to what comes next in the descent.
 
 ## Steps
 
-1. **Draft `home.md`.** 200–350 words, hero image from `public/images/media/modules/generated/` (pick a visually abstract one; avoid any with visible AI/education branding).
-2. **Write each page in the order above.** Commit per page.
-3. **Navigation.** Update `SiteHeader` / `SiteFooter` nav lists to include the new pages. Order matches the table above.
-4. **Homepage listing.** Render a card grid of all published pages on `home.md` using a simple new component `PageCardGrid` (driven by `getAllPages()` sorted by `frontmatter.order`). Counts as a 1-component addition, not a new spec.
+1. **Draft `home.md`.** Keep it brief and cinematic: descent framing, the five layers, and a clear CTA into `/euphotic`.
+2. **Write each zone page in depth order.** Preserve the linear descent and make each closing beat tee up the next layer.
+3. **Navigation.** Update `SiteHeader` / `SiteFooter` nav lists to emphasize surface, current layer, and return-to-surface patterns rather than a docs-style index.
+4. **Zone progression.** Confirm `descentOrder` and `ZoneNavigator` wiring produce the exact path `home → euphotic → dysphotic → aphotic → abyssal → hadal`.
 5. **Images.** Audit `public/images/` and delete anything not used by the final content to keep the deploy small.
 6. **SEO.** Each page has unique `seo.title` and `seo.description`. Add `<meta name="description">` handling in `generateMetadata()` for `[...slug]/page.tsx`.
 7. **Proofread + a11y pass.** Run an automated a11y check (e.g. `axe` via Playwright) on each page in E2E; fix violations.
@@ -47,7 +47,6 @@ Each page:
 ## Files created / modified
 
 - `content/home.md`, `content/pages/*.md` (six pages)
-- `src/components/ui/PageCardGrid.tsx` + `.module.css`
 - `src/components/site-header.tsx`, `site-footer.tsx` — updated nav
 - `src/app/[...slug]/page.tsx`, `src/app/page.tsx` — `generateMetadata`
 - `public/images/` — pruned
@@ -56,7 +55,7 @@ Each page:
 ## Exit checks
 - [ ] All six pages build and deploy
 - [ ] Each page passes axe with zero critical/serious violations
-- [ ] `PageCardGrid` on homepage links to every page
+- [ ] `ZoneNavigator` and in-page CTAs let a reader reach `/hadal` by following the descent path only
 - [ ] No orphan assets: every file in `public/images/` is referenced at least once
 - [ ] Lighthouse still ≥ 90 / 95 / 95 / 95 on home + two deepest pages
 

@@ -1,17 +1,18 @@
 import type { PageData } from "@/lib/content/repository";
 import { MarkdownRenderer } from "@/components/markdown/MarkdownRenderer";
+import { Heading } from "@/components/ui/Heading";
+import { Text } from "@/components/ui/Text";
+import styles from "./StandardLayout.module.css";
 
 export function StandardLayout({ page }: { page: PageData }) {
   return (
-    <main className="min-h-screen bg-[#fffdf9] text-[#1f1a16]">
-      <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
-        <header className="mb-12 border-b border-black/10 pb-8">
-          <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-black/50">
-            {page.frontmatter.layout}
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">{page.frontmatter.title}</h1>
+    <main className={styles.root}>
+      <article className={styles.article}>
+        <header className={styles.header}>
+          <p className={styles.eyebrow}>{page.frontmatter.layout}</p>
+          <Heading level={1}>{page.frontmatter.title}</Heading>
           {page.frontmatter.summary ? (
-            <p className="mt-4 max-w-2xl text-lg leading-8 text-black/70">{page.frontmatter.summary}</p>
+            <Text variant="muted">{page.frontmatter.summary}</Text>
           ) : null}
         </header>
         <MarkdownRenderer>{page.content}</MarkdownRenderer>

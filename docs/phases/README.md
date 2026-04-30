@@ -19,12 +19,12 @@ Tell me **"implement phase N"** (e.g. *"implement phase 01"*) and I will:
 | 00 | [Scaffold](./00-scaffold.md) | ✅ done |
 | 01 | [Design system foundation](./01-design-system.md) | ⏳ pending |
 | 02 | [Content pipeline](./02-content-pipeline.md) | ⏳ pending |
-| 03 | [Standard layout + markdown renderer](./03-standard-layout.md) | ⏳ pending |
+| 03 | [Shared shell + markdown renderer](./03-standard-layout.md) | ⏳ pending |
 | 04 | [Motion primitives](./04-motion-primitives.md) | ⏳ pending |
 | 05 | [Presentation layout](./05-presentation-layout.md) | ⏳ pending |
 | 06 | [Visualizations](./06-visualizations.md) | ⏳ pending |
 | 07 | [CI + deploy hardening](./07-ci-deploy.md) | ⏳ pending |
-| 08 | [Content authoring pass](./08-content-pass.md) | ⏳ pending |
+| 08 | [Ocean content pass](./08-content-pass.md) | ⏳ pending |
 
 Current live tracker: [STATUS.md](./STATUS.md).
 

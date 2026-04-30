@@ -1,3 +1,5 @@
+import styles from "./VisualizationPrimitives.module.css";
+
 export function Timeline({ source }: { source: string }) {
   const events = source
     .trim()
@@ -10,11 +12,11 @@ export function Timeline({ source }: { source: string }) {
     });
 
   return (
-    <ol className="space-y-4 border-l-2 border-slate-300 pl-4">
+    <ol className={styles.timeline}>
       {events.map((event, index) => (
         <li key={index}>
-          <div className="font-mono text-xs uppercase tracking-widest text-slate-500">{event.time}</div>
-          <div className="text-slate-900">{event.label}</div>
+          <div className={styles.timelineTime}>{event.time}</div>
+          <div className={styles.timelineLabel}>{event.label}</div>
         </li>
       ))}
     </ol>

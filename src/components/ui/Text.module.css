@@ -1,0 +1,28 @@
+.body,
+.muted,
+.eyebrow,
+.small {
+  margin: 0;
+}
+
+.body {
+  color: var(--text);
+  max-width: var(--read-measure);
+}
+
+.muted {
+  color: var(--text-muted);
+  max-width: var(--read-measure);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: var(--text-small);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.small {
+  color: var(--text-muted);
+  font-size: var(--text-small);
+}

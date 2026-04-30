@@ -6,13 +6,13 @@ import { useSlideContext } from "./SlideContext";
 
 export function Reveal({ children }: { children: React.ReactNode }) {
   const slide = useSlideContext();
-  if (slide?.scrollYProgress) {
-    return <div>{children}</div>;
-  }
-
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { amount: 0.2, margin: "0px 0px -12% 0px" });
   const reduced = useReducedMotion();
+
+  if (slide?.scrollYProgress) {
+    return <div>{children}</div>;
+  }
 
   return (
     <div ref={ref}>

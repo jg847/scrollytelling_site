@@ -6,8 +6,10 @@ A **layout** owns the page shell (header, nav, footer) and the rendering strateg
 
 | Layout | When to use | Body rendering |
 |---|---|---|
-| `standard` | Essays, tutorials, reference pages | One continuous flow; headings/paragraphs rendered sequentially |
-| `presentation` | Story decks, step-through explainers | Body split on `---` into sticky slides |
+| `standard` | Essays, glossaries, reference side-pages | One continuous flow; headings/paragraphs rendered sequentially |
+| `presentation` | The ocean descent, story decks, step-through explainers | Body split on `---` into sticky slides |
+
+For the ocean site in v1, the homepage and all five zone pages use `presentation`. `standard` remains in the system for auxiliary pages and future expansion, but it is not the primary reading mode for the descent itself.
 
 ## Factory
 
@@ -38,6 +40,8 @@ Responsibilities:
 CSS module: `StandardLayout.module.css`. Uses CSS Grid for the `hero` region (image + title/summary side-by-side), falls back to stacked on narrow viewports.
 
 No `SlideContext` is provided. All `Reveal`s in a standard page run in viewport mode.
+
+In the ocean roadmap, this layout is a support surface, not the headline experience. It exists for reference pages, credits, or future auxiliary material.
 
 ## `PresentationLayout`
 

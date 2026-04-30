@@ -1,22 +1,150 @@
 :root {
-  --background: #fffdf9;
-  --foreground: #1f1a16;
+  --depth: 0;
+  --sea-surface: #4ea7c8;
+  --sea-twilight: #1d4f7a;
+  --sea-midnight: #0a1f3d;
+  --sea-abyss: #02060f;
+  --sea-hadal: #000000;
+  --page-background: color-mix(
+    in oklab,
+    var(--sea-surface) calc((1 - var(--depth)) * 100%),
+    var(--sea-abyss) calc(var(--depth) * 100%)
+  );
+  --surface: rgba(255, 255, 255, 0.04);
+  --rule: rgba(255, 255, 255, 0.1);
+  --text: #e9f2f7;
+  --text-muted: #9fb3c0;
+  --text-strong: #ffffff;
+  --bio-cyan: #6ef0ff;
+  --bio-green: #7cf2b0;
+  --bio-violet: #b48cff;
+  --bio-magenta: #ff5fb1;
+  --accent: var(--bio-cyan);
+  --accent-strong: #b6fbff;
+  --fluid-min-px: 16;
+  --fluid-max-px: 19;
+  --fluid-scaler: calc(
+    var(--fluid-min-px) * 1px +
+    (var(--fluid-max-px) - var(--fluid-min-px)) * ((100vw - 360px) / (1280 - 360))
+  );
+  --text-base: clamp(16px, var(--fluid-scaler), 19px);
+  --text-h4: calc(var(--text-base) * 1.15);
+  --text-h3: calc(var(--text-base) * 1.4);
+  --text-h2: calc(var(--text-base) * 1.85);
+  --text-h1: calc(var(--text-base) * 2.6);
+  --text-display: clamp(2.4rem, 5.4vw, 4.8rem);
+  --text-small: calc(var(--text-base) * 0.86);
+  --wght-base: 400;
+  --wght-h2: 500;
+  --wght-h1: 600;
+  --baseline: 24px;
+  --space-0_5x: calc(var(--baseline) * 0.5);
+  --space-1x: var(--baseline);
+  --space-2x: calc(var(--baseline) * 2);
+  --space-3x: calc(var(--baseline) * 3);
+  --space-4x: calc(var(--baseline) * 4);
+  --space-5x: calc(var(--baseline) * 5);
+  --read-measure: 64ch;
+  --radius-sm: 0.875rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 1.75rem;
+  --glow-cyan: 0 0 24px rgba(110, 240, 255, 0.45);
+  --glow-violet: 0 0 22px rgba(180, 140, 255, 0.45);
+  --shadow-sm: 0 12px 30px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.7);
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-quick: 180ms;
+  --dur-base: 380ms;
+  --dur-slow: 700ms;
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-overlay: 50;
+  --z-modal: 100;
 }
 
-html, body {
+body[data-zone="euphotic"] {
+  --accent: var(--bio-cyan);
+}
+
+body[data-zone="dysphotic"] {
+  --accent: var(--bio-violet);
+}
+
+body[data-zone="aphotic"] {
+  --accent: var(--bio-green);
+}
+
+body[data-zone="abyssal"] {
+  --accent: var(--bio-magenta);
+}
+
+body[data-zone="hadal"] {
+  --accent: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-quick: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
   min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  min-height: 100%;
+  margin: 0;
+  background:
+    radial-gradient(circle at top, rgba(110, 240, 255, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 24%),
+    var(--page-background);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+pre,
+blockquote {
   margin: 0;
 }
 
-@import "tailwindcss";
+a {
+  color: inherit;
+}
 
-:root {
-  --background: #fffdf9;
-  --foreground: #1f1a16;
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  box-shadow: var(--glow-cyan);
 }

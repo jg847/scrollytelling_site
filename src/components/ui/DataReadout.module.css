@@ -1,0 +1,23 @@
+.root {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 8rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.label {
+  color: var(--text-muted);
+  font-size: var(--text-small);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.value {
+  color: var(--text-strong);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-variant-numeric: tabular-nums;
+}

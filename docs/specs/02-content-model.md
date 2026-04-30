@@ -8,9 +8,11 @@ Content is authored as Markdown files with YAML frontmatter. Routing is file-sys
 content/
 ├── home.md                        # served at /
 └── pages/
-    ├── getting-started.md         # → /getting-started
-    ├── what-is-scrollytelling.md  # → /what-is-scrollytelling
-    └── sticky-slides.md           # → /sticky-slides
+  ├── euphotic.md                # → /euphotic
+  ├── dysphotic.md               # → /dysphotic
+  ├── aphotic.md                 # → /aphotic
+  ├── abyssal.md                 # → /abyssal
+  ├── hadal.md                   # → /hadal
 ```
 
 Rules:
@@ -24,15 +26,15 @@ Every file begins with a YAML block validated by Zod at build time.
 
 ```yaml
 ---
-title: "What is scrollytelling?"
-layout: "standard"             # "standard" | "presentation"
-heroImage: "/images/media/modules/generated/era-1-precursors.webp"  # optional
-summary: "A short paragraph used in cards and meta description."    # optional
+title: "Euphotic Zone"
+layout: "presentation"         # "standard" | "presentation"
+heroImage: "/images/ocean/euphotic-reef.webp"  # optional
+summary: "The sunlit skin of the ocean, where photosynthesis still works."    # optional
 seo:
-  title: "What is scrollytelling? | Scrolly"
-  description: "Long-form narrative web design techniques."
-  openGraphImage: "/images/og/what-is.png"
-order: 10                       # optional; sort key for listings
+  title: "Euphotic Zone | Into The Deep"
+  description: "Surface to 200 meters: light, plankton, reefs, and predators in the ocean's brightest layer."
+  openGraphImage: "/images/og/euphotic.png"
+order: 1                        # optional; sort key for listings
 ---
 ```
 

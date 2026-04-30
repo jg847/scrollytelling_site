@@ -2,55 +2,73 @@
 
 ## What we are building
 
-**Scrolly** is a static website that teaches web authors how to build scrollytelling experiences. It is simultaneously:
+A static website that takes the reader on a scroll-driven descent through the five zones of the open ocean. Each zone is its own page; the homepage opens the descent and the reader moves linearly through them — `home → euphotic → dysphotic → aphotic → abyssal → hadal` — until they reach the bottom of the sea.
 
-1. A **tutorial** — long-form pages explain concepts (sticky slides, scroll-linked animation, content schemas, deploying to GitHub Pages).
-2. A **live demo** — every concept is illustrated by the page itself using the same primitives it describes.
-3. A **starter kit** — readers can clone the repo and have a working content-driven scrollytelling site.
+The site is:
 
-Target audience: intermediate front-end developers comfortable with React and TypeScript who want a batteries-included approach to long-form narrative web content.
+1. A **science-forward narrative** — accurate facts about depth, pressure, light, temperature, and the wildlife at each level.
+2. A **scrollytelling experience** — scroll position drives what is visible: the world darkens as you descend, sticky scenes pin while text passes alongside, species fade in as their depth bracket arrives.
+3. A **static site** — a single Next.js build that ships to GitHub Pages with no server.
+
+Target audience: curious lay readers and students. Reading level: high-school to early-undergraduate. No marine-biology background assumed; technical terms (euphotic, aphotic, hadal) are introduced in context.
+
+## A note on naming
+
+This site uses a hybrid of the two standard ocean classifications:
+
+- For the upper water column, the **light-zone** taxonomy: *euphotic* (sunlit), *dysphotic* (twilight), *aphotic* (no sunlight).
+- For the deepest waters, the **depth-zone** taxonomy: *abyssal* and *hadal*.
+
+Strictly, "aphotic" describes everything below the dysphotic zone, including abyssal and hadal waters. On this site we narrow it to the bathypelagic band (~1000–4000 m) and let *abyssal* and *hadal* cover what lies below. Each zone page opens with a one-sentence definition so the reader is never guessing.
 
 ## Non-goals
 
-- Not a CMS. Content is files in the repo.
-- Not a general animation library. Motion primitives are opinionated and narrow.
-- Not server-rendered. Output is static HTML for GitHub Pages.
-- Not a design framework. Styling is CSS Modules + custom properties, intentionally small.
+- Not a marine database. We cover a curated set of species per zone, not an exhaustive catalogue.
+- Not a CMS. Content is markdown files in the repo.
+- Not server-rendered. Output is static HTML.
+- Not a general design framework. Styling is CSS Modules + custom properties, opinionated for this story.
 
 ## Guiding principles
 
-1. **Content is Markdown.** Authors write `.md` files with YAML frontmatter. No JSX in content.
-2. **One primitive, two modes.** Motion components work both on standard scroll pages (viewport triggers) and on presentation slides (scroll-linked), chosen automatically via React context.
-3. **Native browser over libraries.** CSS `position: sticky` + IntersectionObserver + framer-motion cover the full surface area. No GSAP, no react-scrollama.
-4. **Accessibility is baseline.** `prefers-reduced-motion` is honored by every motion primitive; keyboard navigation works.
-5. **Build-time validation.** Frontmatter is Zod-validated; invalid content fails the build, not the browser.
-6. **Static export only.** No runtime server. Output goes to `out/` and ships to GitHub Pages.
+1. **Content is markdown.** Each zone page is a `.md` file with YAML frontmatter — depth range, pressure, light level, temperature, key species. No JSX in content.
+2. **Depth drives design.** Color, type weight, and ambient motion shift as the reader descends. Tokens are parameterised on a `--depth` scroll variable, not hard-coded per page.
+3. **Native browser over libraries.** CSS `position: sticky`, IntersectionObserver, and framer-motion cover everything. No GSAP, no scroll libraries.
+4. **Accessibility is baseline.** `prefers-reduced-motion` is honored by every motion primitive. All facts, species, and depth data are readable as static prose if motion is off.
+5. **Build-time validation.** Frontmatter is Zod-validated; missing depth ranges or invalid zone names fail the build, not the browser.
+6. **Static export only.** Output goes to `out/` and ships to GitHub Pages.
 
 ## Scope (v1)
 
 Included:
-- Two layouts: `standard` (long-scroll article) and `presentation` (sticky-slide deck).
-- Content pipeline: Markdown + YAML frontmatter, Zod schema, dynamic routing, `generateStaticParams`.
-- Motion primitives: `Reveal`, `LayeredRevealGroup`, `DriftMedia`, `SceneCard`, `ParallaxBackground`, `PresentationSlide`, `PresentationProgress`.
-- Design tokens + CSS Modules.
-- Visualization hook: fenced code blocks with a language tag render React components.
-- Unit tests (Vitest) for parsers/repo/schema; E2E (Playwright) for scroll behavior.
+
+- A homepage (`content/home.md`) that introduces the descent and links into the five zones.
+- Five zone pages, one each, in descent order:
+  - `content/pages/euphotic.md` — Sunlight Zone (0–200 m)
+  - `content/pages/dysphotic.md` — Twilight Zone (200–1000 m)
+  - `content/pages/aphotic.md` — Midnight Zone (1000–4000 m)
+  - `content/pages/abyssal.md` — Abyssal Zone (4000–6000 m)
+  - `content/pages/hadal.md` — Hadal Zone (6000–11 000 m)
+- The `presentation` long-scroll layout, used by every page in v1.
+- A `ZoneNavigator` primitive that renders a "Continue descent →" link to the next zone in the sequence (and a "↑ Back up" link to the previous) at the foot of every zone page. Order is read from a `descentOrder` field in frontmatter, not hard-coded.
+- Scrollytelling primitives: dual-mode `Reveal`, `LayeredRevealGroup`, `DriftMedia`, `SceneCard`, `DepthScene` (sticky media + scrolling text), `ParallaxBackground`.
+- A depth-aware theming system: tokens shift as the reader descends a zone.
+- Ocean-specific visualisation components for embedding in markdown: `DepthGauge`, `PressureCard`, `LightScale`, `TemperatureCurve`, `SpeciesCard`, `ZoneStats`.
+- Build-time content validation.
+- Unit tests (Vitest) for parsers/repo/schema; E2E tests (Playwright) for scroll behaviour.
 - GitHub Pages deploy via Actions.
 
 Deferred to later:
-- Search / full-text indexing.
-- Comment system.
-- Dark mode.
+
+- Audio (ambient ocean / hydrophone recordings).
+- Search.
 - Multi-language content.
+- Comments.
+- Per-species deep-dive sub-pages.
 
 ## Success criteria
 
 - `npm run build` produces a static `out/` with zero runtime errors.
-- A new author can add a page by dropping a single `.md` file under `content/pages/` and see it live after push.
-- Scroll animations run at 60fps on a mid-range laptop; drop silently to static under reduced-motion.
-- A Playwright test confirms presentation-mode slides advance via scroll.
-- Lighthouse: Performance ≥ 90, Accessibility ≥ 95 on homepage.
-
-## Relationship to the reference project
-
-Patterns are ported from [docs/bseai_degree](../docs/bseai_degree). Where the reference is coupled to its domain (e.g. `BloomsTaxonomy.tsx`), we **generalize**, not copy, to keep Scrolly topic-neutral.
+- A new author can edit a zone page by changing its `.md` file and see the change live after a push.
+- Scroll animations run at 60fps on a mid-range laptop; degrade silently to a static layout under reduced motion.
+- A Playwright test confirms the depth gauge updates as the reader scrolls into a zone.
+- Lighthouse: Performance ≥ 90, Accessibility ≥ 95 on the homepage and on at least one zone page.

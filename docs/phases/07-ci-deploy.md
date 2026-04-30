@@ -38,8 +38,8 @@ Study but do **not** copy blindly — the reference has a `sed` rewrite step tha
    - Watch workflow, ensure all four jobs green.
 7. **Live checks.** Visit `https://<user>.github.io/scrolly/`:
    - Home loads; no 404s on `/_next/*` or images (DevTools → Network).
-   - `/getting-started/` loads.
-   - `/sticky-slides/` works; progress bar moves.
+   - `/euphotic/` loads.
+   - `/hadal/` works; progress bar moves.
    - Reduced-motion in OS settings disables animations.
 8. **Lighthouse.** Run against the deployed URL. Target: Perf ≥ 90, A11y ≥ 95, Best Practices ≥ 95, SEO ≥ 95. Fix regressions.
 

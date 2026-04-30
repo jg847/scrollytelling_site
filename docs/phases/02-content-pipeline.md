@@ -40,9 +40,9 @@ Load `.md` files from `content/` with Zod-validated frontmatter and generate sta
    Expose `getPageBySlug`, `getAllSlugs`, `getAllPages`. Use `process.cwd()` for `baseDir` resolution.
 7. **Port `parser.ts`.** Export `splitMarkdownIntoSlides(body): ParsedSlide[]` plus an image-directive parser supporting `bg`, `bg x% y%`, `split`, `split-reverse`. Keep the reference's logic; we will need it in Phase 05.
 8. **Write fixtures.**
-   - `content/home.md` — `layout: standard`, title "Scrolly", summary, no body content yet (a single `## Welcome` line is fine).
-   - `content/pages/getting-started.md` — `layout: standard`, a few paragraphs.
-   - `content/pages/sticky-slides.md` — `layout: presentation`, three slides separated by `---`, at least one using `![bg](...)` or `![split](...)`.
+   - `content/home.md` — `layout: presentation`, title "Into The Deep", summary, and a short introductory slide sequence.
+   - `content/pages/euphotic.md` — `layout: presentation`, zone metadata, and at least three slides separated by `---`.
+   - `content/pages/dysphotic.md` — `layout: presentation`, zone metadata, and at least one `![bg](...)` or `![split](...)` directive.
 9. **Route wiring (renderer stub).** For now, `src/app/page.tsx` and `src/app/[...slug]/page.tsx` load the page data and render a **placeholder** shell:
    ```tsx
    return (
@@ -70,7 +70,7 @@ Load `.md` files from `content/` with Zod-validated frontmatter and generate sta
 - `src/lib/content/schema.ts`, `repository.ts`, `parser.ts`
 - `src/app/page.tsx` (placeholder renderer)
 - `src/app/[...slug]/page.tsx` (new)
-- `content/home.md`, `content/pages/getting-started.md`, `content/pages/sticky-slides.md`
+- `content/home.md`, `content/pages/euphotic.md`, `content/pages/dysphotic.md`
 - `tests/unit/setup.ts`, `schema.test.ts`, `markdown-parser.test.ts`, `content-repository.test.ts`
 - `tests/__mocks__/content/*.md`
 - `vitest.config.ts`
@@ -78,7 +78,7 @@ Load `.md` files from `content/` with Zod-validated frontmatter and generate sta
 
 ## Exit checks
 - [ ] `npm run test` passes
-- [ ] `npm run build` succeeds and emits `out/index.html`, `out/getting-started/index.html`, `out/sticky-slides/index.html`
+- [ ] `npm run build` succeeds and emits `out/index.html`, `out/euphotic/index.html`, and `out/dysphotic/index.html`
 - [ ] Requesting `/does-not-exist` 404s at build time (confirm by deleting a page and observing build failure, then restore)
 - [ ] Invalid frontmatter in a fixture makes `npm run build` fail with a readable error mentioning the file path
 

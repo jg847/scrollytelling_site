@@ -31,7 +31,7 @@ Enable fenced-code-block dispatch in `MarkdownRenderer`: authors embed interacti
 6. **Build `ProgressBar`.** Fixed or inline progress tied to window scroll via `useScroll()`. Accepts `label` and optional `tint` from source.
 7. **Build `Mermaid`.** Client-only (`"use client"`, dynamic import of `mermaid`, `useEffect` render). `securityLevel: "strict"`. Fallback: show source in a `<pre>` on error.
 8. **Build `CodeSample`.** Syntax-highlighted code block with optional title. Use a minimal highlighter — **`shiki` via `@shikijs/rehype` if easy**, otherwise plain `<pre><code>` with a data-lang attribute. Do not add a heavy dep for v1; plain is acceptable.
-9. **Content updates.** Add `stat-grid`, `scroll-demo`, `timeline`, `code-sample` usages to `content/pages/getting-started.md` so the features are demoed on the first-read page.
+9. **Content updates.** Add `stat-grid`, `timeline`, `code-sample`, and at least one ocean-specific viz usage to `content/pages/euphotic.md` or `content/pages/dysphotic.md` so the features are exercised on a real zone page.
 10. **Unit tests.**
     - Each viz's source parser.
     - Error-card behavior on malformed input.
@@ -47,11 +47,11 @@ Enable fenced-code-block dispatch in `MarkdownRenderer`: authors embed interacti
 - `src/components/visualization/ProgressBar.tsx` (+ css)
 - `src/components/visualization/Mermaid.tsx`
 - `src/components/visualization/CodeSample.tsx` (+ css)
-- `content/pages/getting-started.md` — expand
+- `content/pages/euphotic.md` or `content/pages/dysphotic.md` — expand
 - `tests/unit/visualizations.test.tsx`
 
 ## Exit checks
-- [ ] Each v1 viz renders correctly from a fenced block on `/getting-started`
+- [ ] Each v1 viz renders correctly from a fenced block on a live zone page
 - [ ] Bad source in any viz produces a visible red-bordered error card (not a silent empty render)
 - [ ] Mermaid chunk is loaded on-demand (confirm via Network tab: absent until a `mermaid` block renders)
 - [ ] `npm run test` passes
