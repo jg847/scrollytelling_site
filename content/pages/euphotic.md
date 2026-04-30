@@ -16,6 +16,16 @@ The word *euphotic* comes from Greek: *eu* (well) + *photos* (light). Well-lit. 
 
 ---
 
+![bg 50% 34% | Sunlight scattering through the upper ocean with fish moving through the bright water](/images/euphotic.jpg)
+
+## Sunlight powers everything below
+
+Most of the ocean’s food web starts here. This is where phytoplankton turn light into sugar, where predators find dense schools of prey, and where the rest of the ocean gets the falling organic matter that keeps the dark alive.
+
+---
+
+![split | Sunlit surface water filled with schooling fish in the euphotic zone](/images/euphotic.jpg)
+
 ## What lives here
 
 ```stat-grid

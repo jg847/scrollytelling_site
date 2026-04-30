@@ -14,6 +14,10 @@ seo:
 
 It also happens to be where most of the ocean is. By volume, the Aphotic Zone holds roughly **three quarters of all the seawater on Earth** — a vast cold black middle that we know less about than the surface of the Moon.
 
+---
+
+![split | A deep-sea anglerfish emerging from black water with its lure glowing](/images/aphotic.jpg)
+
 ## What lives here
 
 ```stat-grid
@@ -27,6 +31,8 @@ It also happens to be where most of the ocean is. By volume, the Aphotic Zone ho
 The animals down here are built around one problem: food is rare, and you may not get another meal for weeks. So they're efficient, slow, and often nightmarish. Black or red bodies (red looks black under bioluminescent blue light, which is mostly what's available). Huge mouths. Hinged jaws that unhinge further. Stomachs that stretch to swallow prey larger than the predator.
 
 You'd find the **deep-sea anglerfish**, dangling a glowing lure from a modified dorsal fin. The **giant squid** and the larger **colossal squid**, hunted by sperm whales that dive thousands of meters chasing them. The **fangtooth**, with proportionally the largest teeth of any fish in the ocean. The **gulper eel**, which is mostly mouth. The **dumbo octopus**, drifting on ear-like fins. The **vampire squid**, which technically isn't a squid and doesn't drink blood, but does live in the oxygen-minimum zone where almost nothing else can.
+
+---
 
 ## A grim little detail
 

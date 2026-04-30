@@ -1,20 +1,121 @@
 .root {
   min-height: 100vh;
   padding: clamp(1.5rem, 4vw, 3rem);
+  display: grid;
+  gap: var(--space-2x);
 }
 
 .article {
-  width: min(100%, 72rem);
+  width: min(100%, 78rem);
   margin: 0 auto;
   display: grid;
   gap: var(--space-2x);
 }
 
-.header {
+.contentGrid {
+  display: grid;
+  gap: var(--space-1x);
+}
+
+.mainColumn {
+  display: grid;
+  gap: var(--space-1x);
+}
+
+.hero {
+  position: relative;
+  min-height: min(84vh, 46rem);
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  display: grid;
+  align-items: end;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.42;
+}
+
+.heroBackground::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(2, 6, 15, 0.08), rgba(2, 6, 15, 0.82)),
+    radial-gradient(circle at top, rgba(110, 240, 255, 0.18), transparent 42%);
+}
+
+.heroCard {
+  position: relative;
+  z-index: 1;
+}
+
+.heroHeader,
+.header,
+.contentCard {
   display: grid;
   gap: var(--space-0_5x);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-lg);
+}
+
+.header {
   padding-bottom: var(--space-1x);
-  border-bottom: 1px solid var(--rule);
+}
+
+.headerCard {
+  display: grid;
+}
+
+.contentCard {
+  gap: var(--space-1x);
+}
+
+.sidebar {
+  display: none;
+}
+
+.sidebarEyebrow {
+  color: var(--accent);
+  font-size: var(--text-small);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.tocList {
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tocLink {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition:
+    color var(--dur-quick) var(--ease-brand),
+    text-shadow var(--dur-quick) var(--ease-brand);
+}
+
+.tocLink:hover {
+  color: var(--text-strong);
+  text-shadow: var(--glow-cyan);
+}
+
+.navigatorWrap {
+  display: flex;
+  justify-content: center;
 }
 
 .eyebrow {
@@ -22,4 +123,25 @@
   font-size: var(--text-small);
   text-transform: uppercase;
   letter-spacing: 0.18em;
-}.root { }
+}
+
+@media (min-width: 1100px) {
+  .contentGrid {
+    grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-2x);
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 1.5rem;
+    display: grid;
+    gap: var(--space-0_5x);
+    padding: 1.25rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-lg);
+  }
+}

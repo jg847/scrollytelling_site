@@ -1,0 +1,29 @@
+.section {
+  position: relative;
+}
+
+.content {
+  height: 170vh;
+}
+
+.background {
+  height: 200vh;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+@media (max-width: 767px) {
+  .content,
+  .background {
+    height: auto;
+  }
+
+  .stage {
+    position: static;
+    height: auto;
+  }
+}

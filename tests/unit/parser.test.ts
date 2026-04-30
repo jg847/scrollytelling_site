@@ -31,6 +31,28 @@ describe("splitMarkdownIntoSlides", () => {
     });
   });
 
+  it("parses descriptive alt text from slide directives", () => {
+    const [slide] = splitMarkdownIntoSlides("![split | A lanternfish suspended in dim blue water](/lanternfish.webp)\n\n## Lanternfish");
+
+    expect(slide).toMatchObject({
+      kind: "split",
+      imageUrl: "/lanternfish.webp",
+      imageAlt: "A lanternfish suspended in dim blue water",
+      markdown: "## Lanternfish",
+    });
+  });
+
+  it("parses background object position and alt text together", () => {
+    const [slide] = splitMarkdownIntoSlides("![bg 50% 35% | Sunbeams breaking across the ocean surface](/reef.webp)\n\n## Reef");
+
+    expect(slide).toMatchObject({
+      kind: "bg",
+      imageUrl: "/reef.webp",
+      imageAlt: "Sunbeams breaking across the ocean surface",
+      objectPosition: "50% 35%",
+    });
+  });
+
   it("parses split directives", () => {
     const [slide] = splitMarkdownIntoSlides("![split](/angler.webp)\n\n## Anglerfish");
 

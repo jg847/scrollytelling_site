@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Heading } from "@/components/ui/Heading";
-import { getHomeRepo } from "@/lib/content/repository";
+import { PageLayoutFactory } from "@/components/layouts/PageLayoutFactory";
+import { getHomeRepo, getPagesRepo } from "@/lib/content/repository";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getHomeRepo().getPageBySlug("home");
@@ -13,11 +13,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const page = await getHomeRepo().getPageBySlug("home");
+  const pages = await getPagesRepo().getAllPages();
+  const orderedPages = pages.sort((left, right) => (left.frontmatter.order ?? Number.MAX_SAFE_INTEGER) - (right.frontmatter.order ?? Number.MAX_SAFE_INTEGER));
+  const stitchedContent = [
+    page.content,
+    ...orderedPages.map((zonePage) => {
+      const intro = [
+        `## ${zonePage.frontmatter.title}`,
+        zonePage.frontmatter.summary,
+      ].filter(Boolean).join("\n\n");
 
-  return (
-    <main>
-      <Heading level={1}>{page.frontmatter.title}</Heading>
-      <pre>{page.content}</pre>
-    </main>
-  );
+      return `${intro}\n\n---\n\n${zonePage.content}`;
+    }),
+  ].join("\n\n---\n\n");
+
+  return <PageLayoutFactory page={{ ...page, content: stitchedContent }} />;
 }

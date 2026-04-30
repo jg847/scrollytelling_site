@@ -10,7 +10,7 @@ Welcome to the tour. Ready to take a dive into the ocean?
 
 Below your feet, the water doesn't just get deeper — it changes. Light fades. Pressure builds. Familiar fish give way to creatures that make their own light, and then to creatures that have never seen any.
 
-We'll descend through five zones, one page at a time.
+We'll descend through five zones in one continuous scroll.
 
 ## The five layers
 
@@ -20,4 +20,4 @@ We'll descend through five zones, one page at a time.
 - [Abyssal  Zone — Abyss](/abyssal) — 4,000 to 6,000 m
 - [Hadal Zone — Trenches](/hadal) — 6,000 m and below
 
-Start with the Sunlight Zone and keep scrolling.
+Start scrolling. The Sunlight Zone is next.

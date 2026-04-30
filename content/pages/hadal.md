@@ -28,11 +28,17 @@ At a thousand atmospheres of pressure, water is no longer easily compressible. S
 
 That workaround is a small molecule called **TMAO** (trimethylamine N-oxide). Hadal fish carry the highest concentrations of it of any animals on Earth — it stabilizes their proteins against the crushing force. Above about **8,400 meters**, even TMAO isn't enough. No fish has ever been found deeper than that. Below that line, the trench belongs to amphipods, sea cucumbers, and single cells.
 
+---
+
+![split | A hadal snailfish hovering just above the trench floor in darkness](/images/hadal.jpg)
+
 ## What lives here
 
 Each trench is biologically an **island**. Separated from the next trench by thousands of kilometers of shallower seafloor, the species in one don't mix with the species in another. New trench expeditions almost always discover new species, because every trench has its own.
 
 You'd find **hadal snailfish** — pale, gelatinous, with no scales and no swim bladder, drifting in slow figure-eights. The current depth record holder, the Mariana snailfish, was filmed at **8,178 meters** in 2017. **Amphipods** swarm in their thousands around bait drops, some species growing to "supergiant" sizes of 30+ centimeters. **Xenophyophores** — single-celled organisms the size of a grapefruit — sit on the trench floor like little mounds of dirt. **Sea cucumbers** are everywhere, as always.
+
+---
 
 ## Humans down here
 

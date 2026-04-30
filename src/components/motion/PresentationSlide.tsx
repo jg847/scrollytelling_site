@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useScroll } from "framer-motion";
 import { SlideContext } from "./SlideContext";
+import styles from "./PresentationSlide.module.css";
 
 export function PresentationSlide({
   children,
@@ -24,15 +25,16 @@ export function PresentationSlide({
   return (
     <SlideContext.Provider value={{ scrollYProgress }}>
       <section
+        className={[styles.section, hasBackground ? styles.background : styles.content].join(" ")}
+        data-presentation-slide="true"
+        data-presentation-slide-index={index}
         ref={ref}
         style={{
-          height: hasBackground ? "200vh" : "170vh",
-          position: "relative",
           zIndex: index,
           backgroundColor,
         }}
       >
-        <div style={{ position: "sticky", top: 0, height: "100vh" }}>
+        <div className={styles.stage} data-presentation-stage="true">
           {children}
         </div>
       </section>

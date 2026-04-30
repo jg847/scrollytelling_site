@@ -9,9 +9,10 @@ import { ProgressBar } from "@/components/visualization/ProgressBar";
 import { ScrollDemo } from "@/components/visualization/ScrollDemo";
 import { StatGrid } from "@/components/visualization/StatGrid";
 import { Timeline } from "@/components/visualization/Timeline";
+import { createHeadingIdFactory } from "./headings";
 import styles from "./MarkdownRenderer.module.css";
 
-function renderMarkdownLine(line: string): ReactNode {
+function renderMarkdownLine(line: string, resolveHeadingId?: (text: string) => string): ReactNode {
   const parts = line.split(/(\[[^\]]+\]\([^\)]+\))/g).filter(Boolean);
   const inline = parts.map((part, index) => {
     const linkMatch = part.match(/^\[([^\]]+)\]\(([^\)]+)\)$/);
@@ -25,9 +26,9 @@ function renderMarkdownLine(line: string): ReactNode {
     return <span key={index}>{part}</span>;
   });
 
-  if (line.startsWith("# ")) return <Heading level={1}>{line.slice(2)}</Heading>;
-  if (line.startsWith("## ")) return <Heading level={2}>{line.slice(3)}</Heading>;
-  if (line.startsWith("### ")) return <Heading level={3}>{line.slice(4)}</Heading>;
+  if (line.startsWith("# ")) return <Heading id={resolveHeadingId?.(line.slice(2))} level={1}>{line.slice(2)}</Heading>;
+  if (line.startsWith("## ")) return <Heading id={resolveHeadingId?.(line.slice(3))} level={2}>{line.slice(3)}</Heading>;
+  if (line.startsWith("### ")) return <Heading id={resolveHeadingId?.(line.slice(4))} level={3}>{line.slice(4)}</Heading>;
   if (line.startsWith("- ")) return <li>{inline.slice(0)}</li>;
   return <Text>{inline}</Text>;
 }
@@ -56,6 +57,7 @@ export function MarkdownRenderer({ children }: { children: string | ReactNode })
     return <div className={styles.root}>{children}</div>;
   }
 
+  const resolveHeadingId = createHeadingIdFactory();
   const blocks = children.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
   const output: ReactNode[] = [];
 
@@ -71,8 +73,8 @@ export function MarkdownRenderer({ children }: { children: string | ReactNode })
       if (lines[0].startsWith("- ")) {
         output.push(
           <Reveal key={index}>
-              <ul className={styles.list}>
-              {lines.map((line, lineIndex) => <li key={lineIndex}>{line.slice(2)}</li>)}
+            <ul className={styles.list}>
+              {lines.map((line, lineIndex) => <li key={lineIndex}>{renderMarkdownLine(line.slice(2), resolveHeadingId)}</li>)}
             </ul>
           </Reveal>,
         );
@@ -82,7 +84,7 @@ export function MarkdownRenderer({ children }: { children: string | ReactNode })
 
       output.push(
         <Reveal key={index}>
-          <div className={styles.block}>{renderMarkdownLine(block)}</div>
+          <div className={styles.block}>{renderMarkdownLine(block, resolveHeadingId)}</div>
         </Reveal>,
       );
   });

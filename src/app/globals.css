@@ -1,5 +1,6 @@
 :root {
   --depth: 0;
+  --depth-base: 0;
   --sea-surface: #4ea7c8;
   --sea-twilight: #1d4f7a;
   --sea-midnight: #0a1f3d;
@@ -64,22 +65,27 @@
 
 body[data-zone="euphotic"] {
   --accent: var(--bio-cyan);
+  --depth-base: 0.05;
 }
 
 body[data-zone="dysphotic"] {
   --accent: var(--bio-violet);
+  --depth-base: 0.3;
 }
 
 body[data-zone="aphotic"] {
   --accent: var(--bio-green);
+  --depth-base: 0.55;
 }
 
 body[data-zone="abyssal"] {
   --accent: var(--bio-magenta);
+  --depth-base: 0.8;
 }
 
 body[data-zone="hadal"] {
   --accent: #ffffff;
+  --depth-base: 0.95;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -99,6 +105,12 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   min-height: 100%;
   margin: 0;
@@ -112,6 +124,25 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+.skip-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: var(--z-modal);
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: rgba(2, 6, 15, 0.96);
+  color: var(--text-strong);
+  border: 1px solid var(--accent);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-140%);
+  transition: transform var(--dur-quick) var(--ease-brand);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 
 h1,

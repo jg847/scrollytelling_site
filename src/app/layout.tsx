@@ -39,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sans.variable} ${display.variable} ${mono.variable}`}>
       <body>
+        <a className="skip-link" href="#main">Skip to main content</a>
         <DepthThemeProvider>{children}</DepthThemeProvider>
       </body>
     </html>

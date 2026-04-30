@@ -8,7 +8,7 @@ seo:
   description: "200 to 1,000 meters down. Where sunlight runs out, bioluminescence takes over, and the largest animal migration on Earth happens every night."
 ---
 
-![bg 50% 35%](/images/ocean/dysphotic-zone.webp)
+![bg 50% 35% | A diver descending into dim blue twilight water as sunlight fades above](/images/ocean/dysphotic-zone.webp)
 
 ## The light runs out
 
@@ -17,6 +17,8 @@ At 200 meters, you cross an invisible line. Above it, plants can still photosynt
 There's no horizon down here. No up, no down, no shadow direction. Just a soft glow from above that gets fainter as you sink.
 
 ---
+
+![split | A twilight-zone fish drifting through dim blue water](/images/dysphotic.jpg)
 
 ## What lives here
 

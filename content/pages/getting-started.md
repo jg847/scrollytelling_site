@@ -1,23 +1,20 @@
 ---
-title: "Into The Deep"
-layout: "presentation"
-summary: "A scroll through the five layers of the ocean. From sunlit surface to the dark trenches that crush submarines."
-seo:
-  title: "Into the Deep — A Tour of the Ocean's Layers"
-  description: "Welcome to the tour! Ready to take a dive into the deep ocean? Scroll down through the Sunlight Zone, The Twilight Zone, The Midnight Zone, The Abyssal Zone, and The Hadal Zone."
+title: "Getting Started"
+layout: "standard"
+summary: "A starter page for the spec-driven Scrolly site."
+heroImage: "/globe.svg"
 ---
-Welcome to the tour. Ready to take a dive into the ocean?
 
-Below your feet, the water doesn't just get deeper — it changes. Light fades. Pressure builds. Familiar fish give way to creatures that make their own light, and then to creatures that have never seen any.
+This page exists so the content repository has at least one generated standard-layout slug.
 
-We'll descend through five zones, one page at a time.
+## What this page demonstrates
 
-## The five layers
+The standard layout is the long-form reading surface for auxiliary pages. It keeps the main content in a readable column, supports a wide-screen table of contents, and leaves room for navigation surfaces that are not part of the sticky-slide presentation deck.
 
-- [Euphotic Zone — Sunlight](/euphotic) — surface to 200 m
-- [Dysphotic  Zone — Twilight](/dysphotic) — 200 to 1,000 m
-- [Aphotic  Zone — Midnight](/aphotic) — 1,000 to 4,000 m
-- [Abyssal  Zone — Abyss](/abyssal) — 4,000 to 6,000 m
-- [Hadal Zone — Trenches](/hadal) — 6,000 m and below
+## How to use the site
 
-Start with the Sunlight Zone and keep scrolling.
+Use the homepage and ocean zone pages for the main descent experience. Use standard pages like this one for setup notes, glossaries, references, and other material that benefits from a continuous reading flow.
+
+## What comes next
+
+As the site grows, this layout will carry support content while the presentation layout remains the primary storytelling mode.

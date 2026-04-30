@@ -14,6 +14,10 @@ The water column ends. The seafloor begins. *Abyssal* comes from the Greek *abys
 
 About **60% of the planet's surface** looks like this. Flat. Cold. Old. Covered in a fine ooze of dead plankton skeletons and clay that's been settling for tens of millions of years. If the surface of the Moon is a museum, the abyssal plain is an attic — undisturbed, slow, dust-thick.
 
+---
+
+![split | A deep seafloor scene with abyssal animals moving across dark sediment](/images/abyssal.jpg)
+
 ## What lives here
 
 ```stat-grid
@@ -27,6 +31,8 @@ About **60% of the planet's surface** looks like this. Flat. Cold. Old. Covered 
 Most of the floor is sparse but not empty. **Sea cucumbers** sift the mud and may be the most successful animals down here by biomass. **Tripod fish** stand motionless on three stiff fin rays, facing the current, waiting for food to drift past. **Sea pigs** (*Scotoplanes*) trundle across the floor in small pink herds on stubby tube feet. **Glass sponges** filter the slow water through skeletons of pure silica. **Brittle stars** carpet some areas in densities of hundreds per square meter.
 
 And occasionally, in volcanic rift zones, you find something else entirely.
+
+---
 
 ## Chemosynthesis
 
