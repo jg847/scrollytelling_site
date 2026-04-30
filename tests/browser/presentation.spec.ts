@@ -9,3 +9,8 @@ test("dysphotic zone page loads", async ({ page }) => {
   await page.goto("/dysphotic/");
   await expect(page.getByRole("heading", { level: 1 }).first()).toHaveText("Dysphotic Zone");
 });
+
+test("aphotic zone page loads", async ({ page }) => {
+  await page.goto("/aphotic/");
+  await expect(page.getByRole("heading", { level: 1 }).first()).toHaveText("Aphotic Zone");
+});
