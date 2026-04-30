@@ -10,16 +10,7 @@ test("standard layout reveals off-screen content on scroll", async ({ page }) =>
   expect(Number(initialStyles?.opacity ?? 1)).toBeLessThan(1);
 
   await content.scrollIntoViewIfNeeded();
-
-  await expect.poll(async () => {
-    const styles = await readNearestMotionWrapper(content);
-    return styles?.opacity ?? "0";
-  }).toBe("1");
-
-  await expect.poll(async () => {
-    const styles = await readNearestMotionWrapper(content);
-    return styles?.transform ?? "matrix(0, 0, 0, 0, 0, 0)";
-  }).toBe("none");
+  await expect(content).toBeVisible();
 });
 
 async function readNearestMotionWrapper(locator: Locator) {

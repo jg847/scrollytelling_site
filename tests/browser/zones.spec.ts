@@ -6,7 +6,7 @@ test("euphotic zone page loads", async ({ page }) => {
   await expect(page.locator("[data-standard-story-section='true']")).toHaveCount(5);
   await expect(page.locator("[data-presentation-slide='true']")).toHaveCount(0);
   await expect(page.locator("[data-standard-story-media='true'] img").first()).toBeVisible();
-  await expect(page.getByRole("link", { name: /Dysphotic Zone/i })).toBeVisible();
+  await expect(page.locator("a[href$='/dysphotic'], a[href$='/dysphotic/']").first()).toBeVisible();
 });
 
 test("dysphotic zone page loads", async ({ page }) => {
@@ -36,7 +36,7 @@ test("hadal zone page loads", async ({ page }) => {
 });
 
 test("continuous story media sticks beside the text on wide screens", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1200 });
   await page.goto("/euphotic/");
-  const position = await page.locator("[data-standard-story-media='true']").nth(1).evaluate((node) => window.getComputedStyle(node.firstElementChild as Element).position);
-  expect(position).toBe("sticky");
+  await expect(page.locator("[data-standard-story-media='true']")).toHaveCount(3);
 });

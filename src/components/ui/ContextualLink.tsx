@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { url } from "@/lib/site-config";
 import styles from "./ContextualLink.module.css";
 
@@ -12,8 +11,8 @@ export function ContextualLink({ href, children }: { href: string; children: Rea
   }
 
   return (
-    <Link className={styles.link} href={url(href)}>
+    <a className={styles.link} href={url(href)}>
       {children}
-    </Link>
+    </a>
   );
 }

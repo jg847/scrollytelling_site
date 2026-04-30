@@ -8,6 +8,7 @@ import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
 import { ZoneNavigator } from "@/components/ui/ZoneNavigator";
 import { splitMarkdownIntoSlides } from "@/lib/content/parser";
+import { url } from "@/lib/site-config";
 import styles from "./StandardLayout.module.css";
 
 const descentOrder = ["euphotic", "dysphotic", "aphotic", "abyssal", "hadal"];
@@ -28,6 +29,7 @@ export function StandardLayout({ page }: { page: PageData }) {
   const useNarrativeSections = storySlugs.includes(page.slug) && sections.length > 0;
   const layoutLabel = storySlugs.includes(page.slug) ? "continuous scrollytelling" : page.frontmatter.layout;
   const sidebarTitle = page.slug === "home" ? "Descent map" : storySlugs.includes(page.slug) ? "Chapter guide" : "On this page";
+  const heroImageSrc = page.frontmatter.heroImage ? url(page.frontmatter.heroImage) : undefined;
 
   function renderNarrativeSection() {
     return (
@@ -60,7 +62,7 @@ export function StandardLayout({ page }: { page: PageData }) {
                     className={styles.storyMediaImage}
                     fill
                     sizes={section.kind === "bg" ? "100vw" : "(min-width: 1100px) 38vw, 100vw"}
-                    src={section.imageUrl}
+                    src={url(section.imageUrl)}
                     style={section.objectPosition ? { objectPosition: section.objectPosition } : undefined}
                   />
                 </div>
@@ -121,9 +123,9 @@ export function StandardLayout({ page }: { page: PageData }) {
 
   return (
     <main className={styles.root} id="main" tabIndex={-1}>
-      {page.frontmatter.heroImage ? (
+      {heroImageSrc ? (
         <section className={styles.hero}>
-          <ParallaxBackground className={styles.heroBackground} priority src={page.frontmatter.heroImage} />
+          <ParallaxBackground className={styles.heroBackground} priority src={heroImageSrc} />
           <SceneCard className={styles.heroCard} variant="emphasis">
             <header className={styles.heroHeader}>
               <p className={styles.eyebrow}>{layoutLabel}</p>
